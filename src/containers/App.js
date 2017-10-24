@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import logo from '../images/logo.svg';
+
 import './App.css';
+import Landing from './Landing/Landing'
 
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        App Home
+        <Landing />
       </div>
-    )
+    );
   }
 }
 
