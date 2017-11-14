@@ -1,7 +1,11 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 
-export default combineReducers({});
+import registration from './registrationReducer';
+import alert from './alertReducer';
 
-export const state = {
-  authenticated: false,
-};
+export default combineReducers({
+  form: formReducer,
+  registration,
+  alert,
+});
