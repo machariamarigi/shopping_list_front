@@ -1,18 +1,20 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './App.css';
 import store from './store';
-import Landing from './containers/Landing'
-
+import Landing from './components/Landing';
 
 const App = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <Switch>
-        <Route path="/" component={Landing} />
-      </Switch>
+      <MuiThemeProvider>
+        <Switch className="App">
+          <Route path="/" component={Landing} />
+        </Switch>
+      </MuiThemeProvider>
     </BrowserRouter>
   </Provider>
 );
