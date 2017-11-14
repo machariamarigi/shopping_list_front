@@ -1,0 +1,19 @@
+.registration_container {
+  flex-grow: 1;
+  margin-top: 30;
+}
+
+.registration-form {
+  padding: 3%;
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+Field {
+  width: 50%;
+  margin-bottom: 2%;
+}
+.registration-form button[type="submit"] {
+  margin: 16px 0px 16px 0px;
+  width: 50%;
+}

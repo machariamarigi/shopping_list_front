@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import IconMenu from 'material-ui/IconMenu';
 import FlatButton from 'material-ui/FlatButton';
@@ -8,11 +9,11 @@ class AppNav extends Component {
     const unAuth = (
       <div>
         <FlatButton label="Login" />
-        <FlatButton label="Register" />
+        <Link to="/register" href><FlatButton label="Register"></FlatButton></Link>
       </div>
     );
 
-    return <AppBar title="Shopping List App" iconElementRight={unAuth} />;
+    return <AppBar title="Shopping List App" showMenuIconButton={false} iconElementRight={unAuth} />;
   }
 }
 
