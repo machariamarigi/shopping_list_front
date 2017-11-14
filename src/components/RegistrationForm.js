@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import { TextField } from 'redux-form-material-ui';
 
-import './RegistrationForm.css';
+import '../styles/authForm.css';
 import { register } from '../actions/authActions';
 import { email, required, minLength, alphaNumeric } from '../helpers/formValidators';
 
@@ -35,8 +35,8 @@ class RegistrationForm extends Component {
   render() {
     const { handleSubmit, registering } = this.props;
     return (
-      <div className="registration_container">
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))} className="registration-form">
+      <div className="auth-container">
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))} className="auth-form">
           <div>
             <Field
               name="username"

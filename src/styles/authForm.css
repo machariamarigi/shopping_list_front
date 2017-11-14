@@ -1,9 +1,9 @@
-.registration_container {
+.auth-container {
   flex-grow: 1;
   margin-top: 30;
 }
 
-.registration-form {
+.auth-form {
   padding: 3%;
   width: 50%;
   margin: auto;
@@ -13,7 +13,7 @@ Field {
   width: 50%;
   margin-bottom: 2%;
 }
-.registration-form button[type="submit"] {
+.auth-form button[type="submit"] {
   margin: 16px 0px 16px 0px;
   width: 50%;
 }
