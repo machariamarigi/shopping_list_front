@@ -14,8 +14,29 @@ function register(user) {
     .then(response => response.data);
 }
 
+function login(email, password) {
+  return authConfig
+    .request({
+      url: '/auth/login',
+      method: 'POST',
+      data: {
+        email,
+        password,
+      },
+    })
+    .then((response) => {
+      if (response.data.status === 'Logged in!') {
+        localStorage.setItem('authentication', response.data.token);
+      } else {
+        return Promise.reject(response.statusText);
+      }
+      return response.data;
+    });
+}
+
 const authService = {
   register,
+  login,
 };
 
 export default authService;
