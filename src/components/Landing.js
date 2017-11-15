@@ -3,9 +3,10 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Snackbar from 'material-ui/Snackbar';
 
-import { alertActions } from '../actions/alertActions';
+import alertActions from '../actions/alertActions';
 import AppNav from './Navigation';
 import RegistrationForm from './RegistrationForm';
+import LoginForm from './LoginForm';
 
 class landingPage extends Component {
   constructor(props) {
@@ -13,6 +14,12 @@ class landingPage extends Component {
     this.state = {
       open: true,
     };
+
+    const { dispatch } = this.props;
+    this.props.history.listen((location, action) => {
+      // clear alert on location change
+      dispatch(alertActions.clear());
+    });
   }
 
   handleOpen = () => {
@@ -38,13 +45,12 @@ class landingPage extends Component {
               top: 0,
               bottom: 'auto',
               left: (window.innerWidth - 288) / 2,
-              transform: alert.message
-                ? 'translate3d(0, 0, 0)'
-                : 'translate3d(0, -50px, 0)',
+              transform: alert.message ? 'translate3d(0, 0, 0)' : 'translate3d(0, -50px, 0)',
             }}
           />
         )}
         <Switch>
+          <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegistrationForm} />
         </Switch>
       </div>

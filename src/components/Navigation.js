@@ -8,7 +8,7 @@ class AppNav extends Component {
   render() {
     const unAuth = (
       <div>
-        <FlatButton label="Login" />
+      <Link to="/login" href><FlatButton label="Login"></FlatButton></Link>
         <Link to="/register" href><FlatButton label="Register"></FlatButton></Link>
       </div>
     );
