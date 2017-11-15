@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import './App.css';
+import './styles/App.css';
 import store from './store';
 import Landing from './components/Landing';
 
