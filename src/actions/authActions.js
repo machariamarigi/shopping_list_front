@@ -11,15 +11,32 @@ export function register(user, callback) {
 
     authService.register(user).then(
       () => {
-        dispach(success());
+        dispach(success(user));
         callback('/login');
       },
       (error) => {
         dispach(failure(error));
-        dispach(alertActions.error(error.response.data.message))
+        dispach(alertActions.error(error.response.data.message));
       },
     );
   };
 }
 
-export const something = '';
+export function login({ email, password }) {
+  const request = user => ({ type: types.LOGIN_REQUEST, user });
+  const success = user => ({ type: types.LOGIN_SUCCESS, user });
+  const failure = error => ({ type: types.LOGIN_FAILURE, error });
+  return (dispach) => {
+    dispach(request(email));
+
+    authService.login(email, password).then(
+      () => {
+        dispach(success(email));
+      },
+      (error) => {
+        dispach(failure(error));
+        dispach(alertActions.error(error.response.data.message));
+      },
+    );
+  };
+}
