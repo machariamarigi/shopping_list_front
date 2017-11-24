@@ -33,14 +33,13 @@ class Dashboard extends Component {
     const { user } = this.props;
     return (
       <div className="container">
+        <h2>{user.username}'s Dashboard</h2>
+        <ShoppingLists shoppinglists={shoppinglists} deleteShoppinglist={this.onDeleteClick} />
         <Link to="/add_shoppinglist" href>
           <FloatingActionButton style={style}>
             <ContentAdd />
           </FloatingActionButton>
         </Link>
-        <hr />
-        <h2>{user.username}'s Dashboard</h2>
-        <ShoppingLists shoppinglists={shoppinglists} deleteShoppinglist={this.onDeleteClick} />
       </div>
     );
   }
