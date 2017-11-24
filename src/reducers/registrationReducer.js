@@ -3,11 +3,11 @@ import * as types from '../actions/actionTypes';
 const registration = (state = {}, action) => {
   switch (action.type) {
     case types.REGISTER_REQUEST:
-      return { registering: true };
+      return { ...state, registering: true };
     case types.REGISTER_SUCCESS:
-      return {};
+      return { ...state, registering: false };
     case types.REGISTER_FAILURE:
-      return {};
+      return { ...state, registering: false };
     default:
       return state;
   }
