@@ -26,7 +26,7 @@ function login(email, password) {
     })
     .then((response) => {
       if (response.data.status === 'Logged in!') {
-        localStorage.setItem('authentication', response.data.token);
+        localStorage.setItem('authorization', response.data.token);
       } else {
         return Promise.reject(response.statusText);
       }
@@ -34,9 +34,19 @@ function login(email, password) {
     });
 }
 
+function getUser() {
+  return authConfig
+    .request({
+      url: '/user',
+      method: 'GET',
+    })
+    .then(response => response.data)
+}
+
 const authService = {
   register,
   login,
+  getUser,
 };
 
 export default authService;
