@@ -1,22 +1,21 @@
 import * as types from '../actions/actionTypes';
 
-const user = JSON.parse(localStorage.getItem('user'));
-const initialState = user ? { loggedIn: true, user } : {};
-
-const authentication = (state = initialState, action) => {
+const authentication = (state = {}, action) => {
   switch (action.type) {
     case types.LOGIN_REQUEST:
       return {
         loggingIn: true,
-        user: action.user,
       };
     case types.LOGIN_SUCCESS:
       return {
-        loggedIn: true,
-        user: action.user,
+        authenticated: true,
+        loggingIn: false,
       };
     case types.LOGIN_FAILURE:
-      return {};
+      return {
+        authenticated: false,
+        loggingIn: false,
+      };
     default:
       return state;
   }
