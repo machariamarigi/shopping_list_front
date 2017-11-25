@@ -1,22 +1,27 @@
 import React from 'react';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
-import Subheader from 'material-ui/Subheader';
 import Paper from 'material-ui/Paper';
 import { Card, CardActions, CardHeader } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
 
-const renderShoppinglists = shoppinglists =>
+const renderShoppinglists = (shoppinglists, deleteShoppinglist) =>
   _.map(shoppinglists, shoppinglist => (
     <Link to={`shoppinglist/${shoppinglist.uuid}`} href>
-      <Paper zDepth={5} rounded={false}>
-        <Card>
+      <Paper zDepth={5} rounded={false} className="shopping-card">
+        <Card key={shoppinglist.uuid}>
           <CardHeader title={shoppinglist.name} />
           <CardActions>
             <FlatButton label="Add Items" primary />
-            <FlatButton label="Edit Shoppinglist" />
-            <FlatButton label="Delete Shoppinglist" secondary />
+            <Link to={`edit_shoppinglist/${shoppinglist.uuid}`} href>
+              <FlatButton label="Edit Shoppinglist" />
+            </Link>
+            <FlatButton
+              label="Delete Shoppinglist"
+              secondary
+              onClick={e => deleteShoppinglist(shoppinglist.uuid, e)}
+            />
           </CardActions>
         </Card>
       </Paper>
@@ -24,11 +29,18 @@ const renderShoppinglists = shoppinglists =>
   ));
 
 const ShoppingLists = (props) => {
-  const { shoppinglists } = props;
+  const { shoppinglists, deleteShoppinglist } = props;
+  if (_.isEmpty(shoppinglists)) {
+    return (
+      <div>
+        <p>No shoppinglists yet. Create one by clicking the + button</p>
+      </div>
+    );
+  }
   return (
     <div>
-      <Subheader>Shopping lists</Subheader>
-      {renderShoppinglists(shoppinglists)}
+      <h3>Shopping lists</h3>
+      {renderShoppinglists(shoppinglists, deleteShoppinglist)}
     </div>
   );
 };

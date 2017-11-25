@@ -6,7 +6,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import { fetchShoppinglists, deleteShoppinglist } from '../actions/shoppinglistActions';
 import ShoppingLists from './ShoppingLists';
-import '../styles/landing.css';
+import '../styles/dashboard.css';
 
 const style = {
   marginRight: 20,
@@ -32,14 +32,16 @@ class Dashboard extends Component {
     const { shoppinglists } = this.props;
     const { user } = this.props;
     return (
-      <div className="container">
-        <h2>{user.username}'s Dashboard</h2>
-        <ShoppingLists shoppinglists={shoppinglists} deleteShoppinglist={this.onDeleteClick} />
-        <Link to="/add_shoppinglist" href>
-          <FloatingActionButton style={style}>
-            <ContentAdd />
-          </FloatingActionButton>
-        </Link>
+      <div>
+        <h2 className="flex-item">{user.username}'s Dashboard</h2>
+        <div className="flex-container">
+          <ShoppingLists shoppinglists={shoppinglists} deleteShoppinglist={this.onDeleteClick} />
+          <Link to="/add_shoppinglist" href>
+            <FloatingActionButton style={style}>
+              <ContentAdd />
+            </FloatingActionButton>
+          </Link>
+        </div>
       </div>
     );
   }
