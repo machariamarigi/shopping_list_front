@@ -24,8 +24,8 @@ class LoginForm extends Component {
   render() {
     const { handleSubmit, loggingIn } = this.props;
     return (
-      <div className="auth-container">
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))} className="auth-form">
+      <div className="form-container">
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))} className="form">
           <div>
             <Field
               name="email"

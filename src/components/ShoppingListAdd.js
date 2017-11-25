@@ -22,7 +22,7 @@ class ShoppingListAdd extends Component {
   render() {
     const { addingShoppinglist } = this.props;
     return (
-      <div className="auth-container">
+      <div className="form-container">
         <ShoppinglistForm
           onSubmit={this.onSubmit}
           addingShoppinglist={addingShoppinglist}

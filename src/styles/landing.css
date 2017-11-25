@@ -1,4 +1,47 @@
-container {
+
+.flex-container {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-item {
+  margin: 10px;
+  line-height: 20px;
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+  flex: 1;
+}
+
+.shopping-card {
+  width: 800px;
+  margin: 25px;
+}
+
+.form-container {
   flex-grow: 1;
   margin-top: 30;
+}
+
+.form {
+  padding: 3%;
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+Field {
+  width: 50%;
+  margin-bottom: 2%;
+}
+.form button[type="submit"] {
+  margin: 16px 0px 16px 0px;
+  width: 50%;
 }

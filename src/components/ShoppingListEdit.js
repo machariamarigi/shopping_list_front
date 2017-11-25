@@ -40,7 +40,7 @@ class ShoppingListEdit extends Component {
     const { name } = shoppinglist;
 
     return (
-      <div className="auth-container">
+      <div className="form-container">
         <ShoppinglistForm
           initialValues={{ name }}
           onSubmit={this.onSubmit}

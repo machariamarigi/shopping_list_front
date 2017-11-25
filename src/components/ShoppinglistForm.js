@@ -14,7 +14,7 @@ const ShoppinglistForm = (props) => {
     handleSubmit, addingShoppinglist, onSubmit, context, editingShoppinglist
   } = props;
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="auth-form">
+    <form onSubmit={handleSubmit(onSubmit)} className="form">
       <h2>{context} A Shopping List</h2>
       <div>
         <Field
