@@ -56,6 +56,7 @@ export function addShoppinglist({ name }, callback) {
       (error) => {
         dispatch(failure(error));
         dispatch(alertActions.error(error.response.data.message));
+        callback('/dashboard');
       },
     );
   };
@@ -77,6 +78,7 @@ export function editShoppinglist(id, { name }, callback) {
       (error) => {
         dispatch(failure(error));
         dispatch(alertActions.error(error.response.data.message));
+        callback('/dashboard');
       },
     );
   };

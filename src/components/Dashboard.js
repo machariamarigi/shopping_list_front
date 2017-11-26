@@ -6,7 +6,6 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import { fetchShoppinglists, deleteShoppinglist } from '../actions/shoppinglistActions';
 import ShoppingLists from './ShoppingLists';
-import '../styles/dashboard.css';
 
 const style = {
   marginRight: 20,

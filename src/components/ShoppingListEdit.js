@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import '../styles/authForm.css';
 import ShoppinglistForm from './ShoppinglistForm';
 import { editShoppinglist, fetchShoppinglist } from '../actions/shoppinglistActions';
 
