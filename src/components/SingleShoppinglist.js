@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import { fetchShoppinglist } from '../actions/shoppinglistActions';
 
@@ -22,7 +23,13 @@ class SingleShoppinglist extends Component {
         </div>
       );
     }
-    return <div>{shoppinglist.name}</div>;
+    return (
+      <div className="content">
+        <RaisedButton className="flex-item" secondary label="Delete Shopping list" />
+        <RaisedButton className="flex-item" label="All Shopping lists" />
+        <h2>Shopping List {shoppinglist.name}</h2>
+      </div>
+    );
   }
 }
 
