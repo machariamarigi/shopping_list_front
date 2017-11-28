@@ -6,6 +6,7 @@ import alert from './alertReducer';
 import authentication from './loginReducer';
 import shoppinglists from './shopppinglistReducer';
 import getUser from './getUserReducer';
+import items from './itemReducer';
 
 
 export default combineReducers({
@@ -15,4 +16,5 @@ export default combineReducers({
   authentication,
   shoppinglists,
   getUser,
+  items,
 });

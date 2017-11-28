@@ -29,9 +29,9 @@ const ItemForm = (props) => {
         <Field
           name="quantity"
           component={TextField}
-          hintText="Name"
+          hintText="Quantity"
           validate={[required, numericOnly]}
-          floatingLabelText="Name"
+          floatingLabelText="Quantity"
         />
       </div>
       <div>
