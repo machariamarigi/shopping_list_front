@@ -3,15 +3,18 @@ import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import { fetchShoppinglist } from '../actions/shoppinglistActions';
+import { fetchItems } from '../actions/itemActions';
+import ItemsList from './ItemsList';
 
 class SingleShoppinglist extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.fetchShoppinglist(id);
+    this.props.fetchItems(id);
   }
 
   render() {
-    const { shoppinglist } = this.props;
+    const { shoppinglist, items } = this.props;
     if (!shoppinglist) {
       return (
         <div>
@@ -28,13 +31,15 @@ class SingleShoppinglist extends Component {
         <RaisedButton className="flex-item" secondary label="Delete Shopping list" />
         <RaisedButton className="flex-item" label="All Shopping lists" />
         <h2>Shopping List {shoppinglist.name}</h2>
+        <ItemsList items={items} />
       </div>
     );
   }
 }
 
-const mapStateToprops = ({ shoppinglists }, ownProps) => ({
+const mapStateToprops = ({ shoppinglists, items }, ownProps) => ({
   shoppinglist: shoppinglists[ownProps.match.params.id],
+  items,
 });
 
-export default connect(mapStateToprops, { fetchShoppinglist })(SingleShoppinglist);
+export default connect(mapStateToprops, { fetchShoppinglist, fetchItems })(SingleShoppinglist);

@@ -23,4 +23,20 @@ export function addItem(id, { name, quantity }, callback) {
   };
 }
 
-export const random = 1;
+export function fetchItems(id) {
+  const request = () => ({ type: types.FETCH_ITEMS_REQUEST });
+  const success = response => ({ type: types.FETCH_ITEMS_SUCCESS, response });
+  const failure = error => ({ type: types.FETCH_ITEMS_FAILURE, error });
+  return (dispatch) => {
+    dispatch(request());
+    itemService.fetchItems(id).then(
+      (response) => {
+        dispatch(success(response));
+      },
+      (error) => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error.response.data.message));
+      },
+    );
+  }
+}
