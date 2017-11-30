@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import { fetchShoppinglist } from '../actions/shoppinglistActions';
-import { fetchItems, buyItem } from '../actions/itemActions';
+import { fetchItems, buyItem, deleteItem } from '../actions/itemActions';
 import ItemsList from './ItemsList';
 
 class SingleShoppinglist extends Component {
@@ -11,6 +11,7 @@ class SingleShoppinglist extends Component {
     super(props);
 
     this.onBoughtClick = this.onBoughtClick.bind(this);
+    this.onDeleteClick = this.onDeleteClick.bind(this);
   }
 
   componentDidMount() {
@@ -24,6 +25,12 @@ class SingleShoppinglist extends Component {
     const shId = this.props.match.params.id;
     this.props.buyItem(shId, itId);
   }
+
+  onDeleteClick = (itId, e) => {
+    e.preventDefault();
+    const shId = this.props.match.params.id;
+    this.props.deleteItem(shId, itId);
+  };
 
   render() {
     const { shoppinglist, items } = this.props;
@@ -44,7 +51,7 @@ class SingleShoppinglist extends Component {
         <RaisedButton className="flex-item" secondary label="Delete Shopping list" />
         <RaisedButton className="flex-item" label="All Shopping lists" />
         <h2>Shopping List {shoppinglist.name}</h2>
-        <ItemsList items={items} buyItem={this.onBoughtClick} />
+        <ItemsList items={items} buyItem={this.onBoughtClick} deleteItem={this.onDeleteClick} />
       </div>
     );
   }
@@ -55,4 +62,6 @@ const mapStateToprops = ({ shoppinglists, items }, ownProps) => ({
   items,
 });
 
-export default connect(mapStateToprops, { fetchShoppinglist, fetchItems, buyItem })(SingleShoppinglist);
+export default connect(mapStateToprops, {
+  fetchShoppinglist, fetchItems, buyItem, deleteItem,
+})(SingleShoppinglist);

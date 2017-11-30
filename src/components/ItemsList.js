@@ -9,7 +9,7 @@ const style = {
   float: 'right',
 };
 
-const renderItems = (items, buyItem) =>
+const renderItems = (items, buyItem, deleteItem) =>
   _.map(items, item => (
     <Card key={item.uuid} className={item.bought ? 'card bought-indication' : 'card'}>
       <CardText className={item.bought ? 'strike' : ''}>
@@ -17,7 +17,12 @@ const renderItems = (items, buyItem) =>
         <p>Quantity: {item.quantity}</p>
       </CardText>
       <CardActions>
-        <FlatButton label="Delete Shoppinglist" secondary style={style} />
+        <FlatButton
+          label="Delete Shoppinglist"
+          secondary
+          style={style}
+          onClick={e => deleteItem(item.uuid, e)}
+        />
         {item.bought ? (
           <div>
             <Chip backgroundColor={blue300}>Bought!</Chip>
@@ -33,7 +38,7 @@ const renderItems = (items, buyItem) =>
   ));
 
 const ItemsList = (props) => {
-  const { items, buyItem } = props;
+  const { items, buyItem, deleteItem } = props;
   if (_.isEmpty(items)) {
     return (
       <div>
@@ -44,7 +49,7 @@ const ItemsList = (props) => {
   return (
     <div>
       <h3>Shopping lists</h3>
-      {renderItems(items, buyItem)}
+      {renderItems(items, buyItem, deleteItem)}
     </div>
   );
 };

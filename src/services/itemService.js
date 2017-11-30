@@ -31,10 +31,20 @@ function buyItem(shId, itId) {
     .then(response => response.data);
 }
 
+function deleteItem(shId, itId) {
+  return itemConfig
+    .request({
+      url: `/shoppinglist/${shId}/item/${itId}`,
+      method: 'DELETE',
+    })
+    .then(response => response.data);
+}
+
 const itemService = {
   addItem,
   fetchItems,
   buyItem,
+  deleteItem,
 };
 
 export default itemService;

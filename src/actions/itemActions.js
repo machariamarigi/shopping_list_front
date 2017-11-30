@@ -48,10 +48,31 @@ export function buyItem(shId, itId) {
 
   return (dispatch) => {
     dispatch(request());
+
     itemService.buyItem(shId, itId).then(
       (response) => {
         dispatch(success(response));
         dispatch(fetchItems(shId));
+      },
+      (error) => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error.response.data.message));
+      },
+    );
+  };
+}
+
+export function deleteItem(shId, itId) {
+  const request = () => ({ type: types.DELETE_ITEM_REQUEST });
+  const success = () => ({ type: types.DELETE_ITEM_SUCCESS, itId });
+  const failure = error => ({ type: types.DELETE_ITEM_FAILURE, error });
+
+  return (dispatch) => {
+    dispatch(request());
+
+    itemService.deleteItem(shId, itId).then(
+      () => {
+        dispatch(success());
       },
       (error) => {
         dispatch(failure(error));
