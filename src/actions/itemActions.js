@@ -38,5 +38,25 @@ export function fetchItems(id) {
         dispatch(alertActions.error(error.response.data.message));
       },
     );
-  }
+  };
+}
+
+export function buyItem(shId, itId) {
+  const request = () => ({ type: types.BUY_ITEM_REQUEST });
+  const success = response => ({ type: types.BUY_ITEM_SUCCESS, response });
+  const failure = error => ({ type: types.BUY_ITEM_FAILURE, error });
+
+  return (dispatch) => {
+    dispatch(request());
+    itemService.buyItem(shId, itId).then(
+      (response) => {
+        dispatch(success(response));
+        dispatch(fetchItems(shId));
+      },
+      (error) => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error.response.data.message));
+      },
+    );
+  };
 }

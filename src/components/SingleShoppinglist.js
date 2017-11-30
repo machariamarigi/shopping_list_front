@@ -3,18 +3,31 @@ import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import { fetchShoppinglist } from '../actions/shoppinglistActions';
-import { fetchItems } from '../actions/itemActions';
+import { fetchItems, buyItem } from '../actions/itemActions';
 import ItemsList from './ItemsList';
 
 class SingleShoppinglist extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onBoughtClick = this.onBoughtClick.bind(this);
+  }
+
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.fetchShoppinglist(id);
     this.props.fetchItems(id);
   }
 
+  onBoughtClick(itId, e) {
+    e.preventDefault();
+    const shId = this.props.match.params.id;
+    this.props.buyItem(shId, itId);
+  }
+
   render() {
     const { shoppinglist, items } = this.props;
+    const { id } = this.props.match.params;
     if (!shoppinglist) {
       return (
         <div>
@@ -31,7 +44,7 @@ class SingleShoppinglist extends Component {
         <RaisedButton className="flex-item" secondary label="Delete Shopping list" />
         <RaisedButton className="flex-item" label="All Shopping lists" />
         <h2>Shopping List {shoppinglist.name}</h2>
-        <ItemsList items={items} />
+        <ItemsList items={items} buyItem={this.onBoughtClick} />
       </div>
     );
   }
@@ -42,4 +55,4 @@ const mapStateToprops = ({ shoppinglists, items }, ownProps) => ({
   items,
 });
 
-export default connect(mapStateToprops, { fetchShoppinglist, fetchItems })(SingleShoppinglist);
+export default connect(mapStateToprops, { fetchShoppinglist, fetchItems, buyItem })(SingleShoppinglist);

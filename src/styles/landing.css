@@ -20,7 +20,7 @@
   flex: 1;
 }
 
-.shopping-card {
+.card {
   width: 800px;
   margin: 25px;
 }
@@ -48,4 +48,16 @@ field {
 .tr-button {
   float: right;
   margin: 10px 350px 0 0;
+}
+
+.bought-indication {
+  background-color: #E0E0E0 !important;
+}
+
+.strike {
+  text-decoration: line-through;
+}
+
+.chip {
+  text-decoration: none !important;
 }

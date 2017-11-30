@@ -22,9 +22,19 @@ function fetchItems(id) {
     .then(response => response.data);
 }
 
+function buyItem(shId, itId) {
+  return itemConfig
+    .request({
+      url: `/shoppinglist/${shId}/item/${itId}`,
+      method: 'PATCH',
+    })
+    .then(response => response.data);
+}
+
 const itemService = {
   addItem,
   fetchItems,
+  buyItem,
 };
 
 export default itemService;
