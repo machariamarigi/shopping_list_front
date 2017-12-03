@@ -13,6 +13,8 @@ const items = (state = { fetchingItems: false }, action) => {
       return { fetchingItems: true };
     case types.FETCH_ITEMS_SUCCESS:
       return _.mapKeys(action.response.items, 'uuid');
+    case types.FETCH_AN_ITEM_SUCCESS:
+      return { ...state, [action.response.item.uuid]: action.response.item };
     case types.DELETE_ITEM_SUCCESS:
       return _.omit(state, action.itId);
     default:

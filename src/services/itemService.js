@@ -22,11 +22,33 @@ function fetchItems(id) {
     .then(response => response.data);
 }
 
+function fetchItem(shId, itId) {
+  return itemConfig
+    .request({
+      url: `/shoppinglist/${shId}/item/${itId}`,
+      method: 'GET',
+    })
+    .then(response => response.data);
+}
+
 function buyItem(shId, itId) {
   return itemConfig
     .request({
       url: `/shoppinglist/${shId}/item/${itId}`,
       method: 'PATCH',
+    })
+    .then(response => response.data);
+}
+
+function editItem(shId, itId, name, quantity) {
+  return itemConfig
+    .request({
+      url: `/shoppinglist/${shId}/item/${itId}`,
+      method: 'PUT',
+      data: {
+        name,
+        quantity,
+      },
     })
     .then(response => response.data);
 }
@@ -43,7 +65,9 @@ function deleteItem(shId, itId) {
 const itemService = {
   addItem,
   fetchItems,
+  fetchItem,
   buyItem,
+  editItem,
   deleteItem,
 };
 

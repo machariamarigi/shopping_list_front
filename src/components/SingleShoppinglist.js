@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
+import { Link } from 'react-router-dom';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import { fetchShoppinglist } from '../actions/shoppinglistActions';
 import { fetchItems, buyItem, deleteItem } from '../actions/itemActions';
 import ItemsList from './ItemsList';
+
+const style = {
+  float: 'right',
+};
 
 class SingleShoppinglist extends Component {
   constructor(props) {
@@ -47,11 +54,22 @@ class SingleShoppinglist extends Component {
       );
     }
     return (
-      <div className="content">
-        <RaisedButton className="flex-item" secondary label="Delete Shopping list" />
-        <RaisedButton className="flex-item" label="All Shopping lists" />
+      <div className="single-shoppinglist">
+        <Link to="/dashboard" href>
+          <RaisedButton className="flex-item" label="All Shopping lists" />
+        </Link>
         <h2>Shopping List {shoppinglist.name}</h2>
-        <ItemsList items={items} buyItem={this.onBoughtClick} deleteItem={this.onDeleteClick} />
+        <ItemsList
+          items={items}
+          buyItem={this.onBoughtClick}
+          deleteItem={this.onDeleteClick}
+          shId={id}
+        />
+        <Link to={`/shoppinglist/${id}/add_item`} href>
+          <FloatingActionButton style={style}>
+            <ContentAdd />
+          </FloatingActionButton>
+        </Link>
       </div>
     );
   }
@@ -63,5 +81,8 @@ const mapStateToprops = ({ shoppinglists, items }, ownProps) => ({
 });
 
 export default connect(mapStateToprops, {
-  fetchShoppinglist, fetchItems, buyItem, deleteItem,
+  fetchShoppinglist,
+  fetchItems,
+  buyItem,
+  deleteItem,
 })(SingleShoppinglist);

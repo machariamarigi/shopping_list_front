@@ -50,6 +50,11 @@ field {
   margin: 10px 350px 0 0;
 }
 
+.single-shoppinglist{
+  margin-left: 300px;
+  width: 800px;
+}
+
 .bought-indication {
   background-color: #E0E0E0 !important;
 }

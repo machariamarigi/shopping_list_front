@@ -41,6 +41,25 @@ export function fetchItems(id) {
   };
 }
 
+export function fetchItem(shId, itId) {
+  const request = () => ({ type: types.FETCH_AN_ITEM_REQUEST });
+  const success = response => ({ type: types.FETCH_AN_ITEM_SUCCESS, response });
+  const failure = error => ({ type: types.FETCH_AN_ITEM_FAILURE, error });
+
+  return (dispatch) => {
+    dispatch(request());
+    itemService.fetchItem(shId, itId).then(
+      (response) => {
+        dispatch(success(response));
+      },
+      (error) => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error.response.data.message));
+      },
+    );
+  };
+}
+
 export function buyItem(shId, itId) {
   const request = () => ({ type: types.BUY_ITEM_REQUEST });
   const success = response => ({ type: types.BUY_ITEM_SUCCESS, response });
@@ -53,6 +72,26 @@ export function buyItem(shId, itId) {
       (response) => {
         dispatch(success(response));
         dispatch(fetchItems(shId));
+      },
+      (error) => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error.response.data.message));
+      },
+    );
+  };
+}
+
+export function editItem(shId, itId, { name, quantity }, callback) {
+  const request = () => ({ type: types.EDIT_ITEM_REQUEST });
+  const success = response => ({ type: types.EDIT_ITEM_SUCCESS, response });
+  const failure = error => ({ type: types.EDIT_ITEM_FAILURE, error });
+
+  return (dispatch) => {
+    dispatch(request());
+    itemService.editItem(shId, itId, name, quantity).then(
+      (response) => {
+        dispatch(success(response));
+        callback(`/shoppinglist/${shId}`);
       },
       (error) => {
         dispatch(failure(error));
