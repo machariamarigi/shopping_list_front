@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Snackbar from 'material-ui/Snackbar';
 
@@ -39,15 +39,15 @@ class landingPage extends Component {
   };
 
   render() {
-    const { alert, getUser } = this.props;
+    const { alert, gettingUser, user, authenticated } = this.props;
 
-    if (getUser.gettingUser) {
+    if (gettingUser) {
       return <div>Loading ... </div>;
     }
 
     return (
       <div>
-        <AppNav user={getUser} />
+        <AppNav user={user} authenticated={authenticated} />
         {alert.message && (
           <Snackbar
             open={this.state.open}
@@ -81,11 +81,13 @@ class landingPage extends Component {
 }
 
 function mapStateToProps(state) {
-  const { alert, getUser } = state;
+  const { alert, gettingUser, user, authenticated } = state;
   return {
     alert,
-    getUser,
+    gettingUser,
+    user,
+    authenticated,
   };
 }
 
-export default connect(mapStateToProps)(landingPage);
+export default withRouter(connect(mapStateToProps)(landingPage));

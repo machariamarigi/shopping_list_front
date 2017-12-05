@@ -75,9 +75,10 @@ class SingleShoppinglist extends Component {
   }
 }
 
-const mapStateToprops = ({ shoppinglists, items }, ownProps) => ({
+const mapStateToprops = ({ shoppinglists, items, gettingItems }, ownProps) => ({
   shoppinglist: shoppinglists[ownProps.match.params.id],
   items,
+  gettingItems,
 });
 
 export default connect(mapStateToprops, {

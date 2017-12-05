@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { Link } from 'react-router-dom';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
@@ -16,6 +17,7 @@ class Dashboard extends Component {
     super(props);
 
     this.onDeleteClick = this.onDeleteClick.bind(this);
+    this.clickShoppinglist = this.clickShoppinglist.bind(this);
   }
 
   componentDidMount() {
@@ -27,14 +29,32 @@ class Dashboard extends Component {
     this.props.deleteShoppinglist(id);
   };
 
+  clickShoppinglist(id, e) {
+    e.preventDefault();
+    this.props.history.push(`/shoppinglist/${id}`);
+  }
+
   render() {
-    const { shoppinglists } = this.props;
+    const { shoppinglists, gettingShoppinglists } = this.props;
     const { user } = this.props;
+
+    if (gettingShoppinglists) {
+      return (
+        <div>
+          <p>Loading...</p>
+        </div>
+      );
+    }
+
     return (
       <div>
         <h2 className="flex-item">{user.username}'s Dashboard</h2>
         <div className="flex-container">
-          <ShoppingLists shoppinglists={shoppinglists} deleteShoppinglist={this.onDeleteClick} />
+          <ShoppingLists
+            shoppinglists={shoppinglists}
+            deleteShoppinglist={this.onDeleteClick}
+            clickShoppinglist={this.clickShoppinglist}
+          />
           <Link to="/add_shoppinglist" href>
             <FloatingActionButton style={style}>
               <ContentAdd />
@@ -48,7 +68,8 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => ({
   shoppinglists: state.shoppinglists,
-  user: state.getUser.user,
+  gettingShoppinglists: state.gettingShoppinglists,
+  user: state.user,
 });
 
 export default connect(mapStateToProps, { fetchShoppinglists, deleteShoppinglist })(Dashboard);

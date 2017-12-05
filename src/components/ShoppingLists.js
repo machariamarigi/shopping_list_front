@@ -5,31 +5,33 @@ import Paper from 'material-ui/Paper';
 import { Card, CardActions, CardHeader } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
-
-const renderShoppinglists = (shoppinglists, deleteShoppinglist) =>
+const renderShoppinglists = (shoppinglists, deleteShoppinglist, clickShoppinglist) =>
   _.map(shoppinglists, shoppinglist => (
-    <Link to={`shoppinglist/${shoppinglist.uuid}`} href>
-      <Paper zDepth={5} rounded={false} className="card">
-        <Card key={shoppinglist.uuid}>
-          <CardHeader title={shoppinglist.name} />
-          <CardActions>
-            <FlatButton label="Add Items" primary />
-            <Link to={`edit_shoppinglist/${shoppinglist.uuid}`} href>
-              <FlatButton label="Edit Shoppinglist" />
-            </Link>
-            <FlatButton
-              label="Delete Shoppinglist"
-              secondary
-              onClick={e => deleteShoppinglist(shoppinglist.uuid, e)}
-            />
-          </CardActions>
-        </Card>
-      </Paper>
-    </Link>
+    <Paper zDepth={5} rounded={false} className="card">
+      <Card key={shoppinglist.uuid}>
+        <CardHeader
+          title={shoppinglist.name}
+          onClick={e => clickShoppinglist(shoppinglist.uuid, e)}
+        />
+        <CardActions>
+          <FlatButton
+            label="Add Items"
+            primary
+            href={`/shoppinglist/${shoppinglist.uuid}/add_item`}
+          />
+          <FlatButton label="Edit Shoppinglist" href={`/edit_shoppinglist/${shoppinglist.uuid}`} />
+          <FlatButton
+            label="Delete Shoppinglist"
+            secondary
+            onClick={e => deleteShoppinglist(shoppinglist.uuid, e)}
+          />
+        </CardActions>
+      </Card>
+    </Paper>
   ));
 
 const ShoppingLists = (props) => {
-  const { shoppinglists, deleteShoppinglist } = props;
+  const { shoppinglists, deleteShoppinglist, clickShoppinglist } = props;
   if (_.isEmpty(shoppinglists)) {
     return (
       <div>
@@ -40,7 +42,7 @@ const ShoppingLists = (props) => {
   return (
     <div>
       <h3>Shopping lists</h3>
-      {renderShoppinglists(shoppinglists, deleteShoppinglist)}
+      {renderShoppinglists(shoppinglists, deleteShoppinglist, clickShoppinglist)}
     </div>
   );
 };

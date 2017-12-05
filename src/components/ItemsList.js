@@ -2,7 +2,6 @@ import React from 'react';
 import _ from 'lodash';
 import Chip from 'material-ui/Chip';
 import { Card, CardActions, CardText } from 'material-ui/Card';
-import { Link } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 import { blue300 } from 'material-ui/styles/colors';
 
@@ -15,7 +14,7 @@ const renderItems = (items, buyItem, deleteItem, shId) =>
     <Card key={item.uuid} className={item.bought ? 'card bought-indication' : 'card'}>
       <CardText className={item.bought ? 'strike' : ''}>
         <p>Item: {item.name}</p>
-        <p>Quantity: {item.quantity}</p>
+        <p>Quantity: {parseFloat(item.quantity)}</p>
       </CardText>
       <CardActions>
         <FlatButton
@@ -26,12 +25,12 @@ const renderItems = (items, buyItem, deleteItem, shId) =>
         />
         {item.bought ? (
           <div>
-            <Chip backgroundColor={blue300}>Bought!</Chip>
+            <Chip backgroundColor={blue300} onRequestDelete={e => buyItem(item.uuid, e)}>Bought!</Chip>
           </div>
         ) : (
           <div>
             <FlatButton label="Bought?" primary onClick={e => buyItem(item.uuid, e)} />{' '}
-            <Link to={`/shoppinglist/${shId}/edit_item/${item.uuid}`} href><FlatButton label="Edit Item" /></Link>
+            <FlatButton label="Edit Item" href={`/shoppinglist/${shId}/edit_item/${item.uuid}`} />
           </div>
         )}
       </CardActions>
@@ -49,7 +48,7 @@ const ItemsList = (props) => {
   }
   return (
     <div>
-      <h3>Shopping lists</h3>
+      <h3>Shopping list Items</h3>
       {renderItems(items, buyItem, deleteItem, shId)}
     </div>
   );
