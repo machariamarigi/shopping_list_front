@@ -18,13 +18,13 @@ class ItemEdit extends Component {
 
   onSubmit(name, quantity) {
     const { shId, itId } = this.props.match.params;
-    this.props.editItem(shId, itId, name, quantity, (path) => {
-      this.props.history.push(path);
-    });
+    this.props.editItem(shId, itId, name, quantity);
+    this.props.history.push(`/shoppinglist/${shId}`);
   }
 
   render() {
     const { editingItem, item } = this.props;
+    const { shId } = this.props.match.params;
     if (!item) {
       return (
         <div>
@@ -36,8 +36,8 @@ class ItemEdit extends Component {
         </div>
       );
     }
-    const { name, quantity } = item;
-
+    const { name } = item;
+    const quantity = parseFloat(item.quantity)
     return (
       <div className="form-container">
         <ItemForm
@@ -45,6 +45,7 @@ class ItemEdit extends Component {
           onSubmit={this.onSubmit}
           editingItem={editingItem}
           context="Edit"
+          shId={shId}
         />
       </div>
     );

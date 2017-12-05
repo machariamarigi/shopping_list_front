@@ -2,7 +2,7 @@ import * as types from './actionTypes';
 import alertActions from './alertActions';
 import itemService from '../services/itemService';
 
-export function addItem(id, { name, quantity }, callback) {
+export function addItem(id, { name, quantity }) {
   const request = () => ({ type: types.ADD_ITEM_REQUEST });
   const success = response => ({ type: types.ADD_ITEM_SUCCESS, response });
   const failure = error => ({ type: types.ADD_ITEM_FAILURE, error });
@@ -13,7 +13,6 @@ export function addItem(id, { name, quantity }, callback) {
     itemService.addItem(id, name, quantity).then(
       (response) => {
         dispatch(success(response));
-        callback();
       },
       (error) => {
         dispatch(failure(error));
@@ -81,7 +80,7 @@ export function buyItem(shId, itId) {
   };
 }
 
-export function editItem(shId, itId, { name, quantity }, callback) {
+export function editItem(shId, itId, { name, quantity }) {
   const request = () => ({ type: types.EDIT_ITEM_REQUEST });
   const success = response => ({ type: types.EDIT_ITEM_SUCCESS, response });
   const failure = error => ({ type: types.EDIT_ITEM_FAILURE, error });
@@ -91,7 +90,6 @@ export function editItem(shId, itId, { name, quantity }, callback) {
     itemService.editItem(shId, itId, name, quantity).then(
       (response) => {
         dispatch(success(response));
-        callback(`/shoppinglist/${shId}`);
       },
       (error) => {
         dispatch(failure(error));
