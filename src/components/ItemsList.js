@@ -3,6 +3,7 @@ import _ from 'lodash';
 import Chip from 'material-ui/Chip';
 import { Card, CardActions, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import { blue300 } from 'material-ui/styles/colors';
 
 const style = {
@@ -17,7 +18,7 @@ const renderItems = (items, buyItem, deleteItem, shId) =>
         <p>Quantity: {parseFloat(item.quantity)}</p>
       </CardText>
       <CardActions>
-        <FlatButton
+        <RaisedButton
           label="Delete Item"
           secondary
           style={style}
@@ -25,7 +26,9 @@ const renderItems = (items, buyItem, deleteItem, shId) =>
         />
         {item.bought ? (
           <div>
-            <Chip backgroundColor={blue300} onRequestDelete={e => buyItem(item.uuid, e)}>Bought!</Chip>
+            <Chip backgroundColor={blue300} onRequestDelete={e => buyItem(item.uuid, e)}>
+              Bought!
+            </Chip>
           </div>
         ) : (
           <div>
@@ -38,7 +41,9 @@ const renderItems = (items, buyItem, deleteItem, shId) =>
   ));
 
 const ItemsList = (props) => {
-  const { items, buyItem, deleteItem, shId } = props;
+  const {
+    items, buyItem, deleteItem, shId,
+  } = props;
   if (_.isEmpty(items)) {
     return (
       <div>

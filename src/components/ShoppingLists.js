@@ -1,9 +1,13 @@
 import React from 'react';
 import _ from 'lodash';
-import { Link } from 'react-router-dom';
 import Paper from 'material-ui/Paper';
 import { Card, CardActions, CardHeader } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+
+const style = {
+  float: 'right',
+};
 
 const renderShoppinglists = (shoppinglists, deleteShoppinglist, clickShoppinglist) =>
   _.map(shoppinglists, shoppinglist => (
@@ -20,10 +24,11 @@ const renderShoppinglists = (shoppinglists, deleteShoppinglist, clickShoppinglis
             href={`/shoppinglist/${shoppinglist.uuid}/add_item`}
           />
           <FlatButton label="Edit Shoppinglist" href={`/edit_shoppinglist/${shoppinglist.uuid}`} />
-          <FlatButton
+          <RaisedButton
             label="Delete Shoppinglist"
             secondary
             onClick={e => deleteShoppinglist(shoppinglist.uuid, e)}
+            style={style}
           />
         </CardActions>
       </Card>
