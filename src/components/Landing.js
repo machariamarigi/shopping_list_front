@@ -12,6 +12,7 @@ import Dashboard from './Dashboard';
 import ShoppingListsAdd from './ShoppingListAdd';
 import SingleShoppinglist from './SingleShoppinglist';
 import ShoppingListEdit from './ShoppingListEdit';
+import ItemAdd from './ItemAdd';
 import NotFound from './NotFound';
 
 class landingPage extends Component {
@@ -65,6 +66,7 @@ class landingPage extends Component {
             <Route path="/login" component={LoginForm} />
             <Route path="/register" component={RegistrationForm} />
             <Route path="/dashboard" component={Dashboard} />
+            <Route path="/shoppinglist/:id/add_item" component={ItemAdd} />
             <Route path="/shoppinglist/:id" component={SingleShoppinglist} />
             <Route path="/add_shoppinglist" component={ShoppingListsAdd} />
             <Route path="/edit_shoppinglist/:id" component={ShoppingListEdit} />

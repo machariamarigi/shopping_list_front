@@ -9,7 +9,7 @@ import FlatButton from 'material-ui/FlatButton';
 const renderShoppinglists = (shoppinglists, deleteShoppinglist) =>
   _.map(shoppinglists, shoppinglist => (
     <Link to={`shoppinglist/${shoppinglist.uuid}`} href>
-      <Paper zDepth={5} rounded={false} className="shopping-card">
+      <Paper zDepth={5} rounded={false} className="card">
         <Card key={shoppinglist.uuid}>
           <CardHeader title={shoppinglist.name} />
           <CardActions>
