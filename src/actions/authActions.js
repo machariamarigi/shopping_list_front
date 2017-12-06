@@ -6,18 +6,18 @@ export function register(user, callback) {
   const request = () => ({ type: types.REGISTER_REQUEST });
   const success = response => ({ type: types.REGISTER_SUCCESS, response });
   const failure = error => ({ type: types.REGISTER_FAILURE, error });
-  return (dispach) => {
-    dispach(request());
+  return (dispatch) => {
+    dispatch(request());
 
     authService.register(user).then(
       (response) => {
-        dispach(success(response));
+        dispatch(success(response));
         callback('/login');
-        dispach(alertActions.success(response.message));
+        dispatch(alertActions.clear());
       },
       (error) => {
-        dispach(failure(error));
-        dispach(alertActions.error(error.response.data.message));
+        dispatch(failure(error));
+        dispatch(alertActions.error(error.response.data.message));
       },
     );
   };
@@ -27,20 +27,20 @@ export function login({ email, password }, callback) {
   const request = () => ({ type: types.LOGIN_REQUEST });
   const success = response => ({ type: types.LOGIN_SUCCESS, response });
   const failure = error => ({ type: types.LOGIN_FAILURE, error });
-  return (dispach) => {
-    dispach(request(email));
+  return (dispatch) => {
+    dispatch(request(email));
 
     authService.login(email, password).then(
       (response) => {
-        dispach(success(response));
-        dispach(alertActions.success(response.message));
-        dispach(getUser())
+        dispatch(success(response));
+        dispatch(alertActions.success(response.message));
+        dispatch(getUser())
         callback('/dashboard');
       },
       (error) => {
-        dispach(failure(error));
-        dispach(alertActions.error(error.response.data.message));
-        localStorage.clear()
+        dispatch(failure(error));
+        dispatch(alertActions.error(error.response.data.message));
+        localStorage.clear();
       },
     );
   };
@@ -51,14 +51,23 @@ export function getUser() {
   const success = response => ({ type: types.GET_USER_SUCCESS, response });
   const failure = error => ({ type: types.GET_USER_FAILURE, error });
 
-  return (dispach) => {
-    dispach(request());
+  return (dispatch) => {
+    dispatch(request());
 
-    authService.getUser().then((response) => {
-      dispach(success(response));
-    }, (error) => {
-      dispach(failure(error));
-      dispach(alertActions.error(error.response.data.message));
-    });
+    authService.getUser().then(
+      (response) => {
+        dispatch(success(response));
+      },
+      (error) => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error.response.data.message));
+        localStorage.removeItem('authorization');
+      },
+    );
   };
+}
+
+export function logout() {
+  localStorage.removeItem('authorization');
+  return { type: types.LOGOUT_REQUEST };
 }
