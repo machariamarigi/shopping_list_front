@@ -8,7 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 const AppNav = (props) => {
-  const { user } = props;
+  const { user, authenticated } = props;
   const auth = (
     <IconMenu
       iconButtonElement={
@@ -41,7 +41,7 @@ const AppNav = (props) => {
     <AppBar
       title="Shopping List App"
       showMenuIconButton={false}
-      iconElementRight={user.authenticated ? auth : unAuth}
+      iconElementRight={authenticated ? auth : unAuth}
     />
   );
 };

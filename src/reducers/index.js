@@ -3,18 +3,24 @@ import { reducer as formReducer } from 'redux-form';
 
 import registration from './registrationReducer';
 import alert from './alertReducer';
-import authentication from './loginReducer';
-import shoppinglists from './shopppinglistReducer';
-import getUser from './getUserReducer';
-import items from './itemReducer';
+import loggingIn from './loginReducer';
+import ShoppinglistReducer from './shopppinglistReducer';
+import UserReducer from './userReducer';
+import ItemsReducer from './itemReducer';
 
-
+const { shoppinglists, gettingShoppinglists } = ShoppinglistReducer;
+const { user, gettingUser, authenticated } = UserReducer;
+const { items, gettingItems } = ItemsReducer;
 export default combineReducers({
   form: formReducer,
   registration,
   alert,
-  authentication,
+  loggingIn,
+  gettingUser,
+  authenticated,
+  user,
   shoppinglists,
-  getUser,
+  gettingShoppinglists,
   items,
+  gettingItems,
 });

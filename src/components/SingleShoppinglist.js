@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
+import { Link } from 'react-router-dom';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import { fetchShoppinglist } from '../actions/shoppinglistActions';
-import { fetchItems, buyItem } from '../actions/itemActions';
+import { fetchItems, buyItem, deleteItem } from '../actions/itemActions';
 import ItemsList from './ItemsList';
+
+const style = {
+  float: 'right',
+};
 
 class SingleShoppinglist extends Component {
   constructor(props) {
     super(props);
 
     this.onBoughtClick = this.onBoughtClick.bind(this);
+    this.onDeleteClick = this.onDeleteClick.bind(this);
   }
 
   componentDidMount() {
@@ -24,6 +32,12 @@ class SingleShoppinglist extends Component {
     const shId = this.props.match.params.id;
     this.props.buyItem(shId, itId);
   }
+
+  onDeleteClick = (itId, e) => {
+    e.preventDefault();
+    const shId = this.props.match.params.id;
+    this.props.deleteItem(shId, itId);
+  };
 
   render() {
     const { shoppinglist, items } = this.props;
@@ -40,19 +54,36 @@ class SingleShoppinglist extends Component {
       );
     }
     return (
-      <div className="content">
-        <RaisedButton className="flex-item" secondary label="Delete Shopping list" />
-        <RaisedButton className="flex-item" label="All Shopping lists" />
+      <div className="single-shoppinglist">
+        <Link to="/dashboard" href>
+          <RaisedButton className="flex-item" label="All Shopping lists" />
+        </Link>
         <h2>Shopping List {shoppinglist.name}</h2>
-        <ItemsList items={items} buyItem={this.onBoughtClick} />
+        <ItemsList
+          items={items}
+          buyItem={this.onBoughtClick}
+          deleteItem={this.onDeleteClick}
+          shId={id}
+        />
+        <Link to={`/shoppinglist/${id}/add_item`} href>
+          <FloatingActionButton style={style}>
+            <ContentAdd />
+          </FloatingActionButton>
+        </Link>
       </div>
     );
   }
 }
 
-const mapStateToprops = ({ shoppinglists, items }, ownProps) => ({
+const mapStateToprops = ({ shoppinglists, items, gettingItems }, ownProps) => ({
   shoppinglist: shoppinglists[ownProps.match.params.id],
   items,
+  gettingItems,
 });
 
-export default connect(mapStateToprops, { fetchShoppinglist, fetchItems, buyItem })(SingleShoppinglist);
+export default connect(mapStateToprops, {
+  fetchShoppinglist,
+  fetchItems,
+  buyItem,
+  deleteItem,
+})(SingleShoppinglist);

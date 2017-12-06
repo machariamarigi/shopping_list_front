@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Snackbar from 'material-ui/Snackbar';
 
@@ -13,6 +13,7 @@ import ShoppingListsAdd from './ShoppingListAdd';
 import SingleShoppinglist from './SingleShoppinglist';
 import ShoppingListEdit from './ShoppingListEdit';
 import ItemAdd from './ItemAdd';
+import ItemEdit from './ItemEdit';
 import NotFound from './NotFound';
 
 class landingPage extends Component {
@@ -38,15 +39,15 @@ class landingPage extends Component {
   };
 
   render() {
-    const { alert, getUser } = this.props;
+    const { alert, gettingUser, user, authenticated } = this.props;
 
-    if (getUser.gettingUser) {
+    if (gettingUser) {
       return <div>Loading ... </div>;
     }
 
     return (
       <div>
-        <AppNav user={getUser} />
+        <AppNav user={user} authenticated={authenticated} />
         {alert.message && (
           <Snackbar
             open={this.state.open}
@@ -67,6 +68,7 @@ class landingPage extends Component {
             <Route path="/register" component={RegistrationForm} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/shoppinglist/:id/add_item" component={ItemAdd} />
+            <Route path="/shoppinglist/:shId/edit_item/:itId" component={ItemEdit} />
             <Route path="/shoppinglist/:id" component={SingleShoppinglist} />
             <Route path="/add_shoppinglist" component={ShoppingListsAdd} />
             <Route path="/edit_shoppinglist/:id" component={ShoppingListEdit} />
@@ -79,11 +81,13 @@ class landingPage extends Component {
 }
 
 function mapStateToProps(state) {
-  const { alert, getUser } = state;
+  const { alert, gettingUser, user, authenticated } = state;
   return {
     alert,
-    getUser,
+    gettingUser,
+    user,
+    authenticated,
   };
 }
 
-export default connect(mapStateToProps)(landingPage);
+export default withRouter(connect(mapStateToProps)(landingPage));

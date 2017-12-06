@@ -3,8 +3,6 @@ import * as types from '../actions/actionTypes';
 
 const shoppinglists = (state = {}, action) => {
   switch (action.type) {
-    case types.FETCH_SHOPPINGLISTS_REQUEST:
-      return { gettingShoppinglists: true };
     case types.FETCH_SHOPPINGLISTS_SUCCESS:
       return _.mapKeys(action.response.shoppinglists, 'uuid');
     case types.FETCH_A_SHOPPINGLIST_SUCCESS:
@@ -24,4 +22,22 @@ const shoppinglists = (state = {}, action) => {
   }
 };
 
-export default shoppinglists;
+const gettingShoppinglists = (state = {}, action) => {
+  switch (action.type) {
+    case types.FETCH_SHOPPINGLISTS_REQUEST:
+      return true;
+    case types.FETCH_SHOPPINGLISTS_SUCCESS:
+      return false;
+    case types.FETCH_SHOPPINGLISTS_FAILURE:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const ShoppinglistReducer = {
+  shoppinglists,
+  gettingShoppinglists,
+};
+
+export default ShoppinglistReducer;

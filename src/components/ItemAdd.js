@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import ItemForm from './ItemForm';
 import { addItem } from '../actions/itemActions';
@@ -14,19 +15,20 @@ class ItemAdd extends Component {
 
   onSubmit(name, quantity) {
     const { id } = this.props.match.params;
-    this.props.addItem(id, name, quantity, () => {
-      this.props.history.push(`/shoppinglist/${id}`);
-    });
+    this.props.addItem(id, name, quantity);
+    this.props.history.push(`/shoppinglist/${id}`);
   }
 
   render() {
     const { addingItem } = this.props;
+    const { id } = this.props.match.params;
     return (
       <div className="form-container">
         <ItemForm
           onSubmit={this.onSubmit}
           addingItem={addingItem}
           context="Add"
+          shId={id}
         />
       </div>
     );
@@ -40,4 +42,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { addItem })(ItemAdd);
+export default withRouter(connect(mapStateToProps, { addItem })(ItemAdd));
