@@ -5,15 +5,15 @@ import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import Account from 'material-ui/svg-icons/action/account-circle';
 
 const AppNav = (props) => {
-  const { user, authenticated } = props;
+  const { user, authenticated, logoutUser } = props;
   const auth = (
     <IconMenu
       iconButtonElement={
         <IconButton>
-          <MoreVertIcon />
+          <Account />
         </IconButton>
       }
       targetOrigin={{ horizontal: 'right', vertical: 'top' }}
@@ -22,7 +22,7 @@ const AppNav = (props) => {
       <Link to="/dashboard" href>
         <MenuItem primaryText="Dashboard" />
       </Link>
-      <MenuItem primaryText="Log Out" />
+      <MenuItem primaryText="Log Out" onClick={e => logoutUser(e)} />
     </IconMenu>
   );
 
