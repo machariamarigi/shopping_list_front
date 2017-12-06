@@ -22,14 +22,16 @@ const user = (state = {}, action) => {
   }
 };
 
-const authenticated = (state = {}, action) => {
+const auth = (state = {}, action) => {
   switch (action.type) {
-    case types.GET_USER_REQUEST:
-      return false;
+    case types.LOGIN_SUCCESS:
+      return { ...state, authenticated: true };
+    case types.LOGIN_FAILURE:
+      return { ...state, authenticated: false };
     case types.GET_USER_SUCCESS:
-      return true;
-    case types.GET_USER_FAILURE:
-      return false;
+      return { ...state, authenticated: true };
+    case types.LOGOUT_REQUEST:
+      return { ...state, authenticated: false };
     default:
       return state;
   }
@@ -37,7 +39,7 @@ const authenticated = (state = {}, action) => {
 
 const UserReducer = {
   user,
-  authenticated,
+  auth,
   gettingUser,
 };
 

@@ -1,18 +1,20 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import logger from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import rootReducer from './reducers';
 import { getUser } from './actions/authActions';
 
-const middleware = applyMiddleware(thunk, logger);
+const middleware = applyMiddleware(thunk);
 
 const configureStore = () => {
   const store = createStore(rootReducer, composeWithDevTools(middleware));
 
-  store.dispatch(getUser());
+  const token = localStorage.getItem('authorization');
 
+  if (token) {
+    store.dispatch(getUser());
+  }
   return store;
 };
 

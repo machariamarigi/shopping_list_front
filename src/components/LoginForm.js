@@ -69,7 +69,7 @@ class LoginForm extends Component {
 }
 
 function mapStateToProps(state) {
-  const { loggingIn } = state.loggingIn;
+  const { loggingIn } = state;
   return {
     loggingIn,
   };

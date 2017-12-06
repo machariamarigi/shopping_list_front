@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Snackbar from 'material-ui/Snackbar';
 
 import alertActions from '../actions/alertActions';
+import { logout } from '../actions/authActions';
 import '../styles/landing.css';
 import AppNav from './Navigation';
+import ProtectedRoute from './ProtectedRoute';
+import UnprotectedRoute from './UnprotectedRoute';
+import Welcome from './Welcome';
 import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
 import Dashboard from './Dashboard';
@@ -23,11 +27,13 @@ class landingPage extends Component {
       open: true,
     };
 
-    const { dispatch } = this.props;
-    this.props.history.listen((location, action) => {
-      // clear alert on location change
-      dispatch(alertActions.clear());
-    });
+    // const { dispatch } = this.props;
+    // this.props.history.listen((location, action) => {
+    //   // clear alert on location change
+    //   dispatch(alertActions.clear());
+    // });
+
+    // this.logoutUser = this.logoutUser.bind(this);
   }
 
   handleOpen = () => {
@@ -38,8 +44,16 @@ class landingPage extends Component {
     this.setState({ open: false });
   };
 
+  logoutUser = (e) => {
+    const { dispatch } = this.props;
+    e.preventDefault();
+    dispatch(logout());
+  };
+
   render() {
-    const { alert, gettingUser, user, authenticated } = this.props;
+    const {
+      alert, gettingUser, user, authenticated,
+    } = this.props;
 
     if (gettingUser) {
       return <div>Loading ... </div>;
@@ -47,13 +61,13 @@ class landingPage extends Component {
 
     return (
       <div>
-        <AppNav user={user} authenticated={authenticated} />
+        <AppNav user={user} authenticated={authenticated} logoutUser={this.logoutUser} />
         {alert.message && (
           <Snackbar
             open={this.state.open}
             message={alert.message}
             autoHideDuration={4000}
-            onRequestClose={this.handleRequestClose}
+            onRequestClose={this.handleClose}
             style={{
               top: 0,
               bottom: 'auto',
@@ -64,14 +78,16 @@ class landingPage extends Component {
         )}
         <div className="container">
           <Switch>
-            <Route path="/login" component={LoginForm} />
-            <Route path="/register" component={RegistrationForm} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/shoppinglist/:id/add_item" component={ItemAdd} />
-            <Route path="/shoppinglist/:shId/edit_item/:itId" component={ItemEdit} />
-            <Route path="/shoppinglist/:id" component={SingleShoppinglist} />
-            <Route path="/add_shoppinglist" component={ShoppingListsAdd} />
-            <Route path="/edit_shoppinglist/:id" component={ShoppingListEdit} />
+            <Redirect from="/" exact to="/welcome" />
+            <UnprotectedRoute exact path="/welcome" component={Welcome} />
+            <UnprotectedRoute exact path="/login" component={LoginForm} />
+            <UnprotectedRoute path="/register" component={RegistrationForm} />
+            <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+            <ProtectedRoute exact path="/shoppinglist/:id/add_item" component={ItemAdd} />
+            <ProtectedRoute exact path="/shoppinglist/:shId/edit_item/:itId" component={ItemEdit} />
+            <ProtectedRoute exact path="/shoppinglist/:id" component={SingleShoppinglist} />
+            <ProtectedRoute exact path="/add_shoppinglist" component={ShoppingListsAdd} />
+            <ProtectedRoute exact path="/edit_shoppinglist/:id" component={ShoppingListEdit} />
             <Route path="*" component={NotFound} />
           </Switch>
         </div>
@@ -81,12 +97,14 @@ class landingPage extends Component {
 }
 
 function mapStateToProps(state) {
-  const { alert, gettingUser, user, authenticated } = state;
+  const {
+    alert, gettingUser, user, auth,
+  } = state;
   return {
     alert,
     gettingUser,
     user,
-    authenticated,
+    authenticated: auth.authenticated,
   };
 }
 
