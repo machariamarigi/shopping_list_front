@@ -30,6 +30,8 @@ const auth = (state = {}, action) => {
       return { ...state, authenticated: false };
     case types.GET_USER_SUCCESS:
       return { ...state, authenticated: true };
+    case types.LOGOUT_REQUEST:
+      return { ...state, authenticated: false };
     default:
       return state;
   }

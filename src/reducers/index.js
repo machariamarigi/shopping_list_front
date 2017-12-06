@@ -9,7 +9,7 @@ import UserReducer from './userReducer';
 import ItemsReducer from './itemReducer';
 
 const { shoppinglists, gettingShoppinglists } = ShoppinglistReducer;
-const { user, gettingUser, authenticated } = UserReducer;
+const { user, gettingUser, auth } = UserReducer;
 const { items, gettingItems } = ItemsReducer;
 export default combineReducers({
   form: formReducer,
@@ -17,7 +17,7 @@ export default combineReducers({
   alert,
   loggingIn,
   gettingUser,
-  authenticated,
+  auth,
   user,
   shoppinglists,
   gettingShoppinglists,
