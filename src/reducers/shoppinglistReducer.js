@@ -35,9 +35,37 @@ const gettingShoppinglists = (state = {}, action) => {
   }
 };
 
+const shoppingPagination = (state = { nextPage: 1, hasNextPage: false, hasPreviousPage: false }, action) => {
+  switch (action.type) {
+    case types.SET_NEXT_PAGE:
+      return {
+        ...state,
+        nextPage: action.currentPage,
+      };
+    case types.HAS_NEXT:
+      return {
+        ...state,
+        hasNextPage: action.hasNextPage,
+      };
+    case types.SET_PREVIOUS_PAGE:
+      return {
+        ...state,
+        previousPage: action.currentPage,
+      };
+    case types.HAS_PREVIOUS:
+      return {
+        ...state,
+        hasPreviousPage: action.hasPreviousPage,
+      };
+    default:
+      return state;
+  }
+};
+
 const ShoppinglistReducer = {
   shoppinglists,
   gettingShoppinglists,
+  shoppingPagination,
 };
 
 export default ShoppinglistReducer;

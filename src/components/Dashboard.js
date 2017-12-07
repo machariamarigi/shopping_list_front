@@ -18,10 +18,12 @@ class Dashboard extends Component {
 
     this.onDeleteClick = this.onDeleteClick.bind(this);
     this.clickShoppinglist = this.clickShoppinglist.bind(this);
+    this.onNextPage = this.onNextPage.bind(this);
+    this.onPreviousPage = this.onPreviousPage.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchShoppinglists();
+    this.props.fetchShoppinglists(1);
   }
 
   onDeleteClick = (id, e) => {
@@ -29,13 +31,25 @@ class Dashboard extends Component {
     this.props.deleteShoppinglist(id);
   };
 
+  onNextPage(e) {
+    e.preventDefault();
+    const { nextPage } = this.props.pagination;
+    this.props.fetchShoppinglists(nextPage);
+  }
+
+  onPreviousPage(e) {
+    e.preventDefault();
+    const { previousPage } = this.props.pagination;
+    this.props.fetchShoppinglists(previousPage);
+  }
+
   clickShoppinglist(id, e) {
     e.preventDefault();
     this.props.history.push(`/shoppinglist/${id}`);
   }
 
   render() {
-    const { shoppinglists, gettingShoppinglists } = this.props;
+    const { shoppinglists, gettingShoppinglists, pagination } = this.props;
     const { user } = this.props;
 
     if (gettingShoppinglists) {
@@ -54,6 +68,10 @@ class Dashboard extends Component {
             shoppinglists={shoppinglists}
             deleteShoppinglist={this.onDeleteClick}
             clickShoppinglist={this.clickShoppinglist}
+            hasNextPage={pagination.hasNextPage}
+            onNextPage={this.onNextPage}
+            hasPreviousPage={pagination.hasPreviousPage}
+            onPreviousPage={this.onPreviousPage}
           />
           <Link to="/add_shoppinglist" href>
             <FloatingActionButton style={style}>
@@ -70,6 +88,7 @@ const mapStateToProps = state => ({
   shoppinglists: state.shoppinglists,
   gettingShoppinglists: state.gettingShoppinglists,
   user: state.user,
+  pagination: state.shoppingPagination,
 });
 
 export default connect(mapStateToProps, { fetchShoppinglists, deleteShoppinglist })(Dashboard);
