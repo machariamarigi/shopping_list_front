@@ -30,7 +30,7 @@ const ItemForm = (props) => {
           name="quantity"
           component={TextField}
           hintText="Quantity"
-          validate={[required, alphaNumeric]}
+          validate={[required, numericOnly]}
           floatingLabelText="Quantity"
         />
       </div>

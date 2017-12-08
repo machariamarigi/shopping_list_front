@@ -6,6 +6,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import { fetchShoppinglists, deleteShoppinglist } from '../actions/shoppinglistActions';
+import Search from './Search';
 import ShoppingLists from './ShoppingLists';
 
 const style = {
@@ -20,10 +21,11 @@ class Dashboard extends Component {
     this.clickShoppinglist = this.clickShoppinglist.bind(this);
     this.onNextPage = this.onNextPage.bind(this);
     this.onPreviousPage = this.onPreviousPage.bind(this);
+    this.searchShoppinglist = this.searchShoppinglist.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchShoppinglists(1);
+    this.props.fetchShoppinglists(1, null);
   }
 
   onDeleteClick = (id, e) => {
@@ -34,13 +36,13 @@ class Dashboard extends Component {
   onNextPage(e) {
     e.preventDefault();
     const { nextPage } = this.props.pagination;
-    this.props.fetchShoppinglists(nextPage);
+    this.props.fetchShoppinglists(nextPage, null);
   }
 
   onPreviousPage(e) {
     e.preventDefault();
     const { previousPage } = this.props.pagination;
-    this.props.fetchShoppinglists(previousPage);
+    this.props.fetchShoppinglists(previousPage, null);
   }
 
   clickShoppinglist(id, e) {
@@ -48,9 +50,16 @@ class Dashboard extends Component {
     this.props.history.push(`/shoppinglist/${id}`);
   }
 
+  searchShoppinglist(event) {
+    event.persist();
+    const term = event.target.value;
+    this.props.fetchShoppinglists(1, term);
+  }
+
   render() {
     const { shoppinglists, gettingShoppinglists, pagination } = this.props;
     const { user } = this.props;
+    const searchShoppinglist = _.debounce(term => this.searchShoppinglist(term), 1000);
 
     if (gettingShoppinglists) {
       return (
@@ -62,8 +71,13 @@ class Dashboard extends Component {
 
     return (
       <div>
-        <h2 className="flex-item">{user.username}'s Dashboard</h2>
         <div className="flex-container">
+          <h2 className="flex-item">{user.username}'s Dashboard</h2>
+          {_.isEmpty(shoppinglists) ? (
+            ''
+          ) : (
+            <Search onSearchTermChange={searchShoppinglist} className="flex-item" />
+          )}
           <ShoppingLists
             shoppinglists={shoppinglists}
             deleteShoppinglist={this.onDeleteClick}
@@ -72,8 +86,9 @@ class Dashboard extends Component {
             onNextPage={this.onNextPage}
             hasPreviousPage={pagination.hasPreviousPage}
             onPreviousPage={this.onPreviousPage}
+            onSearchTermChange={searchShoppinglist}
           />
-          <Link to="/add_shoppinglist" href>
+          <Link to="/add_shoppinglist" href className="fab">
             <FloatingActionButton style={style}>
               <ContentAdd />
             </FloatingActionButton>

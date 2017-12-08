@@ -9,6 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .flex-item {
@@ -19,6 +20,14 @@
   text-align: center;
   flex: 1;
 }
+
+.fab {
+  align-self: flex-end;
+  justify-self: flex-end;
+  margin-right: 50px;
+  margin-bottom: 50px;
+}
+
 
 .card {
   width: 800px;

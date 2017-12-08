@@ -1,9 +1,15 @@
 import shoppinglistConfig from '../helpers/axiosConfig';
 
-function fetchShoppinglists(pageNumber) {
+function fetchShoppinglists(pageNumber, searchTerm) {
+  let url = '';
+  if (searchTerm !== null) {
+    url = `/shoppinglists?q=${searchTerm}`;
+  } else {
+    url = `/shoppinglists?page=${pageNumber}&limit=4`;
+  }
   return shoppinglistConfig
     .request({
-      url: `/shoppinglists?page=${pageNumber}&limit=1`,
+      url,
       method: 'GET',
     })
     .then(response => response.data);

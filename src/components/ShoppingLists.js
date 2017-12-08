@@ -58,10 +58,21 @@ const ShoppingLists = (props) => {
   }
   return (
     <div>
-      <h3>Shopping lists</h3>
       {renderShoppinglists(shoppinglists, deleteShoppinglist, clickShoppinglist)}
-      {hasNextPage ? <RaisedButton onClick={e => onNextPage(e)} style={paginationStyle}>Next Page</RaisedButton> : ''}
-      {hasPreviousPage ? <RaisedButton onClick={e => onPreviousPage(e)} style={paginationStyle}>Previous Page</RaisedButton> : ''}
+      {hasPreviousPage ? (
+        <RaisedButton onClick={e => onPreviousPage(e)} style={paginationStyle}>
+          Previous Page
+        </RaisedButton>
+      ) : (
+        ''
+      )}
+      {hasNextPage ? (
+        <RaisedButton onClick={e => onNextPage(e)} style={paginationStyle}>
+          Next Page
+        </RaisedButton>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

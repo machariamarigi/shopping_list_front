@@ -37,7 +37,7 @@ class ItemEdit extends Component {
       );
     }
     const { name } = item;
-    const quantity = parseFloat(item.quantity)
+    const quantity = parseFloat(item.quantity);
     return (
       <div className="form-container">
         <ItemForm

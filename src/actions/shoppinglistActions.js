@@ -2,14 +2,14 @@ import * as types from './actionTypes';
 import alertActions from './alertActions';
 import shoppinglistService from '../services/shoppinglistService';
 
-export function fetchShoppinglists(pageNumber) {
+export function fetchShoppinglists(pageNumber, searchTerm) {
   const request = () => ({ type: types.FETCH_SHOPPINGLISTS_REQUEST });
   const success = response => ({ type: types.FETCH_SHOPPINGLISTS_SUCCESS, response });
   const failure = error => ({ type: types.FETCH_SHOPPINGLISTS_FAILURE, error });
   return (dispatch) => {
     dispatch(request());
 
-    shoppinglistService.fetchShoppinglists(pageNumber).then(
+    shoppinglistService.fetchShoppinglists(pageNumber, searchTerm).then(
       (response) => {
         dispatch(success(response));
         if (response.next_page !== null) {
