@@ -2,16 +2,28 @@ import * as types from './actionTypes';
 import alertActions from './alertActions';
 import shoppinglistService from '../services/shoppinglistService';
 
-export function fetchShoppinglists() {
+export function fetchShoppinglists(pageNumber, searchTerm) {
   const request = () => ({ type: types.FETCH_SHOPPINGLISTS_REQUEST });
   const success = response => ({ type: types.FETCH_SHOPPINGLISTS_SUCCESS, response });
   const failure = error => ({ type: types.FETCH_SHOPPINGLISTS_FAILURE, error });
   return (dispatch) => {
     dispatch(request());
 
-    shoppinglistService.fetchShoppinglists().then(
+    shoppinglistService.fetchShoppinglists(pageNumber, searchTerm).then(
       (response) => {
         dispatch(success(response));
+        if (response.next_page !== null) {
+          dispatch({ type: types.HAS_NEXT, hasNextPage: true });
+          dispatch({ type: types.SET_NEXT_PAGE, currentPage: pageNumber + 1 });
+        } else {
+          dispatch({ type: types.HAS_NEXT, hasNextPage: false });
+        }
+        if (response.previous_page !== null) {
+          dispatch({ type: types.HAS_PREVIOUS, hasPreviousPage: true });
+          dispatch({ type: types.SET_PREVIOUS_PAGE, currentPage: pageNumber - 1 });
+        } else {
+          dispatch({ type: types.HAS_PREVIOUS, hasPreviousPage: false });
+        }
       },
       (error) => {
         dispatch(failure(error));

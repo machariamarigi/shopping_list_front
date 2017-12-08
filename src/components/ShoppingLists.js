@@ -9,6 +9,10 @@ const style = {
   float: 'right',
 };
 
+const paginationStyle = {
+  margin: 5,
+};
+
 const renderShoppinglists = (shoppinglists, deleteShoppinglist, clickShoppinglist) =>
   _.map(shoppinglists, shoppinglist => (
     <Paper zDepth={5} rounded={false} className="card">
@@ -36,7 +40,15 @@ const renderShoppinglists = (shoppinglists, deleteShoppinglist, clickShoppinglis
   ));
 
 const ShoppingLists = (props) => {
-  const { shoppinglists, deleteShoppinglist, clickShoppinglist } = props;
+  const {
+    shoppinglists,
+    deleteShoppinglist,
+    clickShoppinglist,
+    hasNextPage,
+    onNextPage,
+    hasPreviousPage,
+    onPreviousPage,
+  } = props;
   if (_.isEmpty(shoppinglists)) {
     return (
       <div>
@@ -46,8 +58,21 @@ const ShoppingLists = (props) => {
   }
   return (
     <div>
-      <h3>Shopping lists</h3>
       {renderShoppinglists(shoppinglists, deleteShoppinglist, clickShoppinglist)}
+      {hasPreviousPage ? (
+        <RaisedButton onClick={e => onPreviousPage(e)} style={paginationStyle}>
+          Previous Page
+        </RaisedButton>
+      ) : (
+        ''
+      )}
+      {hasNextPage ? (
+        <RaisedButton onClick={e => onNextPage(e)} style={paginationStyle}>
+          Next Page
+        </RaisedButton>
+      ) : (
+        ''
+      )}
     </div>
   );
 };
