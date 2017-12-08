@@ -22,6 +22,19 @@ const shoppinglists = (state = {}, action) => {
   }
 };
 
+const deletingShoppinglist = (state = false, action) => {
+  switch (action.type) {
+    case types.DELETE_SHOPPINGLIST_REQUEST:
+      return true;
+    case types.DELETE_SHOPPINGLIST_SUCCESS:
+      return false;
+    case types.DELETE_SHOPPINGLIST_FAILURE:
+      return false;
+    default:
+      return state;
+  }
+}
+
 const gettingShoppinglists = (state = {}, action) => {
   switch (action.type) {
     case types.FETCH_SHOPPINGLISTS_REQUEST:
@@ -35,7 +48,10 @@ const gettingShoppinglists = (state = {}, action) => {
   }
 };
 
-const shoppingPagination = (state = { nextPage: 1, hasNextPage: false, hasPreviousPage: false }, action) => {
+const shoppingPagination = (
+  state = { nextPage: 1, hasNextPage: false, hasPreviousPage: false },
+  action,
+) => {
   switch (action.type) {
     case types.SET_NEXT_PAGE:
       return {
@@ -66,6 +82,7 @@ const ShoppinglistReducer = {
   shoppinglists,
   gettingShoppinglists,
   shoppingPagination,
+  deletingShoppinglist,
 };
 
 export default ShoppinglistReducer;

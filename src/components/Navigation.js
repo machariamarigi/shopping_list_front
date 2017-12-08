@@ -10,20 +10,23 @@ import Account from 'material-ui/svg-icons/action/account-circle';
 const AppNav = (props) => {
   const { user, authenticated, logoutUser } = props;
   const auth = (
-    <IconMenu
-      iconButtonElement={
-        <IconButton>
-          <Account />
-        </IconButton>
-      }
-      targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-      anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-    >
-      <Link to="/dashboard" href>
-        <MenuItem primaryText="Dashboard" />
-      </Link>
-      <MenuItem primaryText="Log Out" onClick={e => logoutUser(e)} />
-    </IconMenu>
+    <div>
+      <IconMenu
+        iconButtonElement={
+          <IconButton>
+            <Account />
+          </IconButton>
+        }
+        targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+      >
+        <p className="icon-menu-title">{user.username} profile</p>
+        <Link to="/dashboard" href>
+          <MenuItem primaryText="Dashboard" />
+        </Link>
+        <MenuItem primaryText="Log Out" onClick={e => logoutUser(e)} />
+      </IconMenu>
+    </div>
   );
 
   const unAuth = (

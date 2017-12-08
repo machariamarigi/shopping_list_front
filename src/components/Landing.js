@@ -3,7 +3,6 @@ import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Snackbar from 'material-ui/Snackbar';
 
-import alertActions from '../actions/alertActions';
 import { logout } from '../actions/authActions';
 import '../styles/landing.css';
 import AppNav from './Navigation';
@@ -26,14 +25,6 @@ class landingPage extends Component {
     this.state = {
       open: true,
     };
-
-    // const { dispatch } = this.props;
-    // this.props.history.listen((location, action) => {
-    //   // clear alert on location change
-    //   dispatch(alertActions.clear());
-    // });
-
-    // this.logoutUser = this.logoutUser.bind(this);
   }
 
   handleOpen = () => {
