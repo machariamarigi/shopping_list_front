@@ -8,7 +8,12 @@ import ShoppinglistReducer from './shoppinglistReducer';
 import UserReducer from './userReducer';
 import ItemsReducer from './itemReducer';
 
-const { shoppinglists, gettingShoppinglists, shoppingPagination } = ShoppinglistReducer;
+const {
+  shoppinglists,
+  gettingShoppinglists,
+  shoppingPagination,
+  deletingShoppinglist,
+} = ShoppinglistReducer;
 const { user, gettingUser, auth } = UserReducer;
 const { items, gettingItems } = ItemsReducer;
 export default combineReducers({
@@ -24,4 +29,5 @@ export default combineReducers({
   shoppingPagination,
   items,
   gettingItems,
+  deletingShoppinglist,
 });

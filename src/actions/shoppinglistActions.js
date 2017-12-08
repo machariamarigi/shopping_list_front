@@ -107,6 +107,7 @@ export function deleteShoppinglist(id) {
     shoppinglistService.deleteShoppinlist(id).then(
       () => {
         dispatch(success());
+        dispatch(fetchShoppinglists(1, null));
       },
       (error) => {
         dispatch(failure(error));

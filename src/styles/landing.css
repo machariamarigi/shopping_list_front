@@ -59,6 +59,11 @@ field {
   margin: 10px 350px 0 0;
 }
 
+.icon-menu-title {
+  color: rgb(0, 188, 212);
+  text-transform: uppercase;
+}
+
 .single-shoppinglist{
   margin-left: 300px;
   width: 800px;

@@ -5,7 +5,7 @@ function fetchShoppinglists(pageNumber, searchTerm) {
   if (searchTerm !== null) {
     url = `/shoppinglists?q=${searchTerm}`;
   } else {
-    url = `/shoppinglists?page=${pageNumber}&limit=4`;
+    url = `/shoppinglists?page=${pageNumber}&limit=5`;
   }
   return shoppinglistConfig
     .request({

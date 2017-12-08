@@ -57,8 +57,13 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { shoppinglists, gettingShoppinglists, pagination } = this.props;
-    const { user } = this.props;
+    const {
+      shoppinglists,
+      gettingShoppinglists,
+      pagination,
+      user,
+      deletingShoppinglist,
+    } = this.props;
     const searchShoppinglist = _.debounce(term => this.searchShoppinglist(term), 1000);
 
     if (gettingShoppinglists) {
@@ -87,6 +92,7 @@ class Dashboard extends Component {
             hasPreviousPage={pagination.hasPreviousPage}
             onPreviousPage={this.onPreviousPage}
             onSearchTermChange={searchShoppinglist}
+            deletingShoppinglist={deletingShoppinglist}
           />
           <Link to="/add_shoppinglist" href className="fab">
             <FloatingActionButton style={style}>
@@ -104,6 +110,7 @@ const mapStateToProps = state => ({
   gettingShoppinglists: state.gettingShoppinglists,
   user: state.user,
   pagination: state.shoppingPagination,
+  deletingShoppinglist: state.deletingShoppinglist,
 });
 
 export default connect(mapStateToProps, { fetchShoppinglists, deleteShoppinglist })(Dashboard);

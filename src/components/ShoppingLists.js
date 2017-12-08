@@ -13,7 +13,7 @@ const paginationStyle = {
   margin: 5,
 };
 
-const renderShoppinglists = (shoppinglists, deleteShoppinglist, clickShoppinglist) =>
+const renderShoppinglists = (shoppinglists, deleteShoppinglist, clickShoppinglist, deletingShoppinglist) =>
   _.map(shoppinglists, shoppinglist => (
     <Paper zDepth={5} rounded={false} className="card">
       <Card key={shoppinglist.uuid}>
@@ -33,7 +33,15 @@ const renderShoppinglists = (shoppinglists, deleteShoppinglist, clickShoppinglis
             secondary
             onClick={e => deleteShoppinglist(shoppinglist.uuid, e)}
             style={style}
+            disabled={deletingShoppinglist}
           />
+          {deletingShoppinglist && (
+            <img
+              style={style}
+              alt="loading..."
+              src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+            />
+          )}
         </CardActions>
       </Card>
     </Paper>
@@ -48,6 +56,7 @@ const ShoppingLists = (props) => {
     onNextPage,
     hasPreviousPage,
     onPreviousPage,
+    deletingShoppinglist
   } = props;
   if (_.isEmpty(shoppinglists)) {
     return (
@@ -58,7 +67,7 @@ const ShoppingLists = (props) => {
   }
   return (
     <div>
-      {renderShoppinglists(shoppinglists, deleteShoppinglist, clickShoppinglist)}
+      {renderShoppinglists(shoppinglists, deleteShoppinglist, clickShoppinglist, deletingShoppinglist)}
       {hasPreviousPage ? (
         <RaisedButton onClick={e => onPreviousPage(e)} style={paginationStyle}>
           Previous Page
