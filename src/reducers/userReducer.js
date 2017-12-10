@@ -24,12 +24,18 @@ const user = (state = {}, action) => {
 
 const auth = (state = {}, action) => {
   switch (action.type) {
+    case types.LOGIN_REQUEST:
+      return { ...state, authenticated: false };
     case types.LOGIN_SUCCESS:
       return { ...state, authenticated: true };
     case types.LOGIN_FAILURE:
       return { ...state, authenticated: false };
+    case types.GET_USER_REQUEST:
+      return { ...state, authenticated: true };
     case types.GET_USER_SUCCESS:
       return { ...state, authenticated: true };
+    case types.GET_USER_FAILURE:
+      return { ...state, authenticated: false };
     case types.LOGOUT_REQUEST:
       return { ...state, authenticated: false };
     default:

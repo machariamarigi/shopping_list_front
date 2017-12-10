@@ -34,7 +34,7 @@ export function login({ email, password }, callback) {
       (response) => {
         dispatch(success(response));
         dispatch(alertActions.success(response.message));
-        dispatch(getUser())
+        dispatch(getUser());
         callback('/dashboard');
       },
       (error) => {
