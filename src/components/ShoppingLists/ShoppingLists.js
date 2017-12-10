@@ -4,6 +4,7 @@ import Paper from 'material-ui/Paper';
 import { Card, CardActions, CardHeader } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog';
 
 const style = {
   float: 'right',
@@ -18,6 +19,7 @@ const renderShoppinglists = (
   deleteShoppinglist,
   clickShoppinglist,
   deletingShoppinglist,
+  deleteModal,
 ) =>
   _.map(shoppinglists, shoppinglist => (
     <Paper zDepth={5} rounded={false} className="card">
@@ -36,7 +38,7 @@ const renderShoppinglists = (
           <RaisedButton
             label="Delete Shoppinglist"
             secondary
-            onClick={e => deleteShoppinglist(shoppinglist.uuid, e)}
+            onClick={event => deleteModal(event, shoppinglist.uuid)}
             style={style}
             disabled={deletingShoppinglist}
           />
@@ -62,6 +64,9 @@ const ShoppingLists = (props) => {
     hasPreviousPage,
     onPreviousPage,
     deletingShoppinglist,
+    deleteModal,
+    hideDeleteModal,
+    currentModal,
   } = props;
   if (_.isEmpty(shoppinglists)) {
     return (
@@ -70,13 +75,22 @@ const ShoppingLists = (props) => {
       </div>
     );
   }
+
+  const actions = [
+    <FlatButton label="Cancel" onClick={event => hideDeleteModal(event)} />,
+    <FlatButton label="Delete" secondary onClick={event => deleteShoppinglist(currentModal.shId, event)} />,
+  ];
   return (
     <div>
+      <Dialog title="Delete Shopping List" actions={actions} open={currentModal.isOpen}>
+        {currentModal.message}
+      </Dialog>
       {renderShoppinglists(
         shoppinglists,
         deleteShoppinglist,
         clickShoppinglist,
         deletingShoppinglist,
+        deleteModal,
       )}
       {hasPreviousPage ? (
         <RaisedButton onClick={e => onPreviousPage(e)} style={paginationStyle}>
