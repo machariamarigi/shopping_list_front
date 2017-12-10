@@ -5,19 +5,19 @@ import Snackbar from 'material-ui/Snackbar';
 
 import { logout } from '../actions/authActions';
 import '../styles/landing.css';
-import AppNav from './Navigation';
-import ProtectedRoute from './ProtectedRoute';
-import UnprotectedRoute from './UnprotectedRoute';
-import Welcome from './Welcome';
-import RegistrationForm from './RegistrationForm';
-import LoginForm from './LoginForm';
+import AppNav from './UI/Navigation';
+import ProtectedRoute from './Auth/ProtectedRoute';
+import UnprotectedRoute from './Auth/UnprotectedRoute';
+import Welcome from './UI/Welcome';
+import RegistrationForm from './Auth/RegistrationForm';
+import LoginForm from './Auth/LoginForm';
 import Dashboard from './Dashboard';
-import ShoppingListsAdd from './ShoppingListAdd';
+import ShoppingListsAdd from './ShoppingLists/ShoppingListAdd';
 import SingleShoppinglist from './SingleShoppinglist';
-import ShoppingListEdit from './ShoppingListEdit';
-import ItemAdd from './ItemAdd';
-import ItemEdit from './ItemEdit';
-import NotFound from './NotFound';
+import ShoppingListEdit from './ShoppingLists/ShoppingListEdit';
+import ItemAdd from './Items/ItemAdd';
+import ItemEdit from './Items/ItemEdit';
+import NotFound from './UI/NotFound';
 
 class landingPage extends Component {
   constructor(props) {

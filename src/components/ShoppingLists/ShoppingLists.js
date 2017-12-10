@@ -13,7 +13,12 @@ const paginationStyle = {
   margin: 5,
 };
 
-const renderShoppinglists = (shoppinglists, deleteShoppinglist, clickShoppinglist, deletingShoppinglist) =>
+const renderShoppinglists = (
+  shoppinglists,
+  deleteShoppinglist,
+  clickShoppinglist,
+  deletingShoppinglist,
+) =>
   _.map(shoppinglists, shoppinglist => (
     <Paper zDepth={5} rounded={false} className="card">
       <Card key={shoppinglist.uuid}>
@@ -56,7 +61,7 @@ const ShoppingLists = (props) => {
     onNextPage,
     hasPreviousPage,
     onPreviousPage,
-    deletingShoppinglist
+    deletingShoppinglist,
   } = props;
   if (_.isEmpty(shoppinglists)) {
     return (
@@ -67,7 +72,12 @@ const ShoppingLists = (props) => {
   }
   return (
     <div>
-      {renderShoppinglists(shoppinglists, deleteShoppinglist, clickShoppinglist, deletingShoppinglist)}
+      {renderShoppinglists(
+        shoppinglists,
+        deleteShoppinglist,
+        clickShoppinglist,
+        deletingShoppinglist,
+      )}
       {hasPreviousPage ? (
         <RaisedButton onClick={e => onPreviousPage(e)} style={paginationStyle}>
           Previous Page

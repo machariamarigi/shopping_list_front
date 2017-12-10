@@ -3,7 +3,7 @@ import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import { TextField } from 'redux-form-material-ui';
-import { alphaNumeric, numericOnly, required } from '../helpers/formValidators';
+import { alphaNumeric, numericOnly, required } from '../../helpers/formValidators';
 
 const style = {
   margin: 12,
@@ -11,7 +11,7 @@ const style = {
 
 const ItemForm = (props) => {
   const {
-    handleSubmit, addingItem, onSubmit, context, editingItem, shId
+    handleSubmit, addingItem, onSubmit, context, editingItem, shId,
   } = props;
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="form">
@@ -35,13 +35,7 @@ const ItemForm = (props) => {
         />
       </div>
       <div>
-        <RaisedButton
-          label={context}
-          primary
-          style={style}
-          type="Submit"
-          disabled={addingItem}
-        />
+        <RaisedButton label={context} primary style={style} type="Submit" disabled={addingItem} />
         {addingItem && (
           <img
             alt="loading..."

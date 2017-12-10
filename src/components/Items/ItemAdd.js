@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import ItemForm from './ItemForm';
-import { addItem } from '../actions/itemActions';
-
+import { addItem } from '../../actions/itemActions';
 
 class ItemAdd extends Component {
   constructor(props) {
@@ -24,12 +23,7 @@ class ItemAdd extends Component {
     const { id } = this.props.match.params;
     return (
       <div className="form-container">
-        <ItemForm
-          onSubmit={this.onSubmit}
-          addingItem={addingItem}
-          context="Add"
-          shId={id}
-        />
+        <ItemForm onSubmit={this.onSubmit} addingItem={addingItem} context="Add" shId={id} />
       </div>
     );
   }

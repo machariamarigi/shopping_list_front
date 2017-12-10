@@ -7,7 +7,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import { fetchShoppinglist } from '../actions/shoppinglistActions';
 import { fetchItems, buyItem, deleteItem } from '../actions/itemActions';
-import ItemsList from './ItemsList';
+import ItemsList from './Items/ItemsList';
 
 const style = {
   float: 'right',

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ShoppinglistForm from './ShoppinglistForm';
-import { addShoppinglist } from '../actions/shoppinglistActions';
-
+import ShoppinglistForm from './ShoppingListForm';
+import { addShoppinglist } from '../../actions/shoppinglistActions';
 
 class ShoppingListAdd extends Component {
   constructor(props) {

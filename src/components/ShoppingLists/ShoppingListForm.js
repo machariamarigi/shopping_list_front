@@ -3,7 +3,7 @@ import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import { TextField } from 'redux-form-material-ui';
-import { alphaNumeric, required } from '../helpers/formValidators';
+import { alphaNumeric, required } from '../../helpers/formValidators';
 
 const style = {
   margin: 12,
@@ -11,7 +11,7 @@ const style = {
 
 const ShoppinglistForm = (props) => {
   const {
-    handleSubmit, addingShoppinglist, onSubmit, context, editingShoppinglist
+    handleSubmit, addingShoppinglist, onSubmit, context, editingShoppinglist,
   } = props;
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="form">

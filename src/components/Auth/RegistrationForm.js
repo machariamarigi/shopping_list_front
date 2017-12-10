@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import { TextField } from 'redux-form-material-ui';
 
-import { register } from '../actions/authActions';
-import { email, required, minLength, alphaNumeric } from '../helpers/formValidators';
+import { register } from '../../actions/authActions';
+import { email, required, minLength, alphaNumeric } from '../../helpers/formValidators';
 
 const style = {
   margin: 12,

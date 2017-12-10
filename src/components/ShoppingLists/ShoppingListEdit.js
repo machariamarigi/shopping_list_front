@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ItemForm from './ItemForm';
-import { editItem, fetchItem } from '../actions/itemActions';
+import ShoppinglistForm from './ShoppingListForm';
+import { editShoppinglist, fetchShoppinglist } from '../../actions/shoppinglistActions';
 
-class ItemEdit extends Component {
+class ShoppingListEdit extends Component {
   constructor(props) {
     super(props);
 
@@ -12,20 +12,20 @@ class ItemEdit extends Component {
   }
 
   componentDidMount() {
-    const { shId, itId } = this.props.match.params;
-    this.props.fetchItem(shId, itId);
+    const { id } = this.props.match.params;
+    this.props.fetchShoppinglist(id);
   }
 
-  onSubmit(name, quantity) {
-    const { shId, itId } = this.props.match.params;
-    this.props.editItem(shId, itId, name, quantity);
-    this.props.history.push(`/shoppinglist/${shId}`);
+  onSubmit(name) {
+    const { id } = this.props.match.params;
+    this.props.editShoppinglist(id, name, (path) => {
+      this.props.history.push(path);
+    });
   }
 
   render() {
-    const { editingItem, item } = this.props;
-    const { shId } = this.props.match.params;
-    if (!item) {
+    const { editingShoppinglist, shoppinglist } = this.props;
+    if (!shoppinglist) {
       return (
         <div>
           Loading...{' '}
@@ -36,25 +36,24 @@ class ItemEdit extends Component {
         </div>
       );
     }
-    const { name } = item;
-    const quantity = parseFloat(item.quantity);
+    const { name } = shoppinglist;
+
     return (
       <div className="form-container">
-        <ItemForm
-          initialValues={{ name, quantity }}
+        <ShoppinglistForm
+          initialValues={{ name }}
           onSubmit={this.onSubmit}
-          editingItem={editingItem}
+          editingShoppinglist={editingShoppinglist}
           context="Edit"
-          shId={shId}
         />
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ items, editingItem }, ownProps) => ({
-  editingItem,
-  item: items[ownProps.match.params.itId],
+const mapStateToProps = ({ shoppinglists, editingShoppinglist }, ownProps) => ({
+  editingShoppinglist,
+  shoppinglist: shoppinglists[ownProps.match.params.id],
 });
 
-export default connect(mapStateToProps, { editItem, fetchItem })(ItemEdit);
+export default connect(mapStateToProps, { editShoppinglist, fetchShoppinglist })(ShoppingListEdit);

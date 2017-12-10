@@ -6,8 +6,8 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import { fetchShoppinglists, deleteShoppinglist } from '../actions/shoppinglistActions';
-import Search from './Search';
-import ShoppingLists from './ShoppingLists';
+import Search from './UI/Search';
+import ShoppingLists from './ShoppingLists/ShoppingLists';
 
 const style = {
   marginRight: 20,
