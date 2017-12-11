@@ -81,7 +81,7 @@ const ShoppingLists = (props) => {
     <FlatButton
       label="Delete"
       secondary
-      onClick={event => deleteShoppinglist(currentModal.shId, event)}
+      onClick={event => deleteShoppinglist(currentModal.id, event)}
     />,
   ];
   return (
@@ -100,14 +100,14 @@ const ShoppingLists = (props) => {
         deleteModal,
       )}
       {hasPreviousPage ? (
-        <RaisedButton onClick={e => onPreviousPage(e)} style={paginationStyle}>
+        <RaisedButton onClick={event => onPreviousPage(event)} style={paginationStyle}>
           Previous Page
         </RaisedButton>
       ) : (
         ''
       )}
       {hasNextPage ? (
-        <RaisedButton onClick={e => onNextPage(e)} style={paginationStyle}>
+        <RaisedButton onClick={event => onNextPage(event)} style={paginationStyle}>
           Next Page
         </RaisedButton>
       ) : (

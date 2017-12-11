@@ -91,26 +91,28 @@ class Dashboard extends Component {
     return (
       <div>
         <div className="flex-container">
-          <h2 className="flex-item">{user.username}'s Dashboard</h2>
-          {_.isEmpty(shoppinglists) ? (
-            ''
-          ) : (
-            <Search onSearchTermChange={searchShoppinglist} className="flex-item" />
-          )}
-          <ShoppingLists
-            shoppinglists={shoppinglists}
-            deleteShoppinglist={this.onDeleteClick}
-            clickShoppinglist={this.clickShoppinglist}
-            hasNextPage={pagination.hasNextPage}
-            onNextPage={this.onNextPage}
-            hasPreviousPage={pagination.hasPreviousPage}
-            onPreviousPage={this.onPreviousPage}
-            onSearchTermChange={searchShoppinglist}
-            deletingShoppinglist={deletingShoppinglist}
-            deleteModal={this.deleteModal}
-            hideDeleteModal={this.hideDeleteModal}
-            currentModal={modal}
-          />
+          <div className="flex-content">
+            <h2 className="flex-item">{user.username}'s Dashboard</h2>
+            {_.isEmpty(shoppinglists) ? (
+              ''
+            ) : (
+              <Search onSearchTermChange={searchShoppinglist} className="flex-item" />
+            )}
+            <ShoppingLists
+              shoppinglists={shoppinglists}
+              deleteShoppinglist={this.onDeleteClick}
+              clickShoppinglist={this.clickShoppinglist}
+              hasNextPage={pagination.hasNextPage}
+              onNextPage={this.onNextPage}
+              hasPreviousPage={pagination.hasPreviousPage}
+              onPreviousPage={this.onPreviousPage}
+              onSearchTermChange={searchShoppinglist}
+              deletingShoppinglist={deletingShoppinglist}
+              deleteModal={this.deleteModal}
+              hideDeleteModal={this.hideDeleteModal}
+              currentModal={modal}
+            />
+          </div>
           <Link to="/add_shoppinglist" href className="fab">
             <FloatingActionButton style={style}>
               <ContentAdd />

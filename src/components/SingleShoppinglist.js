@@ -67,21 +67,23 @@ class SingleShoppinglist extends Component {
       );
     }
     return (
-      <div className="single-shoppinglist">
-        <Link to="/dashboard" href>
-          <RaisedButton className="flex-item" label="All Shopping lists" />
-        </Link>
-        <h2>Shopping List {shoppinglist.name}</h2>
-        <ItemsList
-          items={items}
-          buyItem={this.onBoughtClick}
-          deleteItem={this.onDeleteClick}
-          shId={id}
-          deleteModal={this.deleteModal}
-          currentModal={modal}
-          hideDeleteModal={this.hideDeleteModal}
-        />
-        <Link to={`/shoppinglist/${id}/add_item`} href>
+      <div className="flex-container">
+        <div className="flex-content">
+          <Link to="/dashboard" href>
+            <RaisedButton className="flex-item" label="All Shopping lists" />
+          </Link>
+          <h2>Shopping List {shoppinglist.name}</h2>
+          <ItemsList
+            items={items}
+            buyItem={this.onBoughtClick}
+            deleteItem={this.onDeleteClick}
+            shId={id}
+            deleteModal={this.deleteModal}
+            currentModal={modal}
+            hideDeleteModal={this.hideDeleteModal}
+          />
+        </div>
+        <Link to={`/shoppinglist/${id}/add_item`} href className="fab">
           <FloatingActionButton style={style}>
             <ContentAdd />
           </FloatingActionButton>
