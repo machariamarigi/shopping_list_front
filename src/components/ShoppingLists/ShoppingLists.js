@@ -4,7 +4,7 @@ import Paper from 'material-ui/Paper';
 import { Card, CardActions, CardHeader } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import Dialog from 'material-ui/Dialog';
+import ModalDialog from '../UI/ModalDialog';
 
 const style = {
   float: 'right',
@@ -78,13 +78,20 @@ const ShoppingLists = (props) => {
 
   const actions = [
     <FlatButton label="Cancel" onClick={event => hideDeleteModal(event)} />,
-    <FlatButton label="Delete" secondary onClick={event => deleteShoppinglist(currentModal.shId, event)} />,
+    <FlatButton
+      label="Delete"
+      secondary
+      onClick={event => deleteShoppinglist(currentModal.shId, event)}
+    />,
   ];
   return (
     <div>
-      <Dialog title="Delete Shopping List" actions={actions} open={currentModal.isOpen}>
-        {currentModal.message}
-      </Dialog>
+      <ModalDialog
+        context="Delete Shopping List"
+        actions={actions}
+        open={currentModal.isOpen}
+        message={currentModal.message}
+      />
       {renderShoppinglists(
         shoppinglists,
         deleteShoppinglist,

@@ -7,8 +7,7 @@ const modals = (state = { isOpen: false, message: '' }, action) => {
         ...state,
         isOpen: true,
         message: action.message,
-        shId: action.shId,
-        itId: action.itId,
+        id: action.id,
       };
     case HIDE_MODAL:
       return {

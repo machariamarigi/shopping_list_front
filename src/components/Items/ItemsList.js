@@ -5,12 +5,13 @@ import { Card, CardActions, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import { blue300 } from 'material-ui/styles/colors';
+import ModalDialog from '../UI/ModalDialog';
 
 const style = {
   float: 'right',
 };
 
-const renderItems = (items, buyItem, deleteItem, shId) =>
+const renderItems = (items, buyItem, deleteItem, shId, deleteModal) =>
   _.map(items, item => (
     <Card key={item.uuid} className={item.bought ? 'card bought-indication' : 'card'}>
       <CardText className={item.bought ? 'strike' : ''}>
@@ -22,7 +23,7 @@ const renderItems = (items, buyItem, deleteItem, shId) =>
           label="Delete Item"
           secondary
           style={style}
-          onClick={e => deleteItem(item.uuid, e)}
+          onClick={event => deleteModal(event, item.uuid)}
         />
         {item.bought ? (
           <div>
@@ -42,7 +43,7 @@ const renderItems = (items, buyItem, deleteItem, shId) =>
 
 const ItemsList = (props) => {
   const {
-    items, buyItem, deleteItem, shId,
+    items, buyItem, deleteItem, shId, deleteModal, currentModal, hideDeleteModal
   } = props;
   if (_.isEmpty(items)) {
     return (
@@ -51,10 +52,26 @@ const ItemsList = (props) => {
       </div>
     );
   }
+
+  const actions = [
+    <FlatButton label="Cancel" onClick={event => hideDeleteModal(event)} />,
+    <FlatButton
+      label="Delete"
+      secondary
+      onClick={event => deleteItem(currentModal.id, event)}
+    />,
+  ];
+
   return (
     <div>
+      <ModalDialog
+        context="Delete Items"
+        open={currentModal.isOpen}
+        message={currentModal.message}
+        actions={actions}
+      />
       <h3>Shopping list Items</h3>
-      {renderItems(items, buyItem, deleteItem, shId)}
+      {renderItems(items, buyItem, deleteItem, shId, deleteModal)}
     </div>
   );
 };

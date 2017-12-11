@@ -7,6 +7,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import { fetchShoppinglist } from '../actions/shoppinglistActions';
 import { fetchItems, buyItem, deleteItem } from '../actions/itemActions';
+import { showModal, hideModal } from '../actions/modalActions';
 import ItemsList from './Items/ItemsList';
 
 const style = {
@@ -19,6 +20,8 @@ class SingleShoppinglist extends Component {
 
     this.onBoughtClick = this.onBoughtClick.bind(this);
     this.onDeleteClick = this.onDeleteClick.bind(this);
+    this.deleteModal = this.deleteModal.bind(this);
+    this.hideDeleteModal = this.hideDeleteModal.bind(this);
   }
 
   componentDidMount() {
@@ -27,20 +30,30 @@ class SingleShoppinglist extends Component {
     this.props.fetchItems(id);
   }
 
-  onBoughtClick(itId, e) {
-    e.preventDefault();
+  onBoughtClick(itId, event) {
+    event.preventDefault();
     const shId = this.props.match.params.id;
     this.props.buyItem(shId, itId);
   }
 
-  onDeleteClick = (itId, e) => {
-    e.preventDefault();
+  onDeleteClick = (itId, event) => {
     const shId = this.props.match.params.id;
     this.props.deleteItem(shId, itId);
+    this.hideDeleteModal(event);
   };
 
+  deleteModal(event, shId, itId) {
+    event.preventDefault();
+    this.props.showModal('Are you sure you want to delete this item', shId, itId);
+  }
+
+  hideDeleteModal(event) {
+    event.preventDefault();
+    this.props.hideModal();
+  }
+
   render() {
-    const { shoppinglist, items } = this.props;
+    const { shoppinglist, items, modal } = this.props;
     const { id } = this.props.match.params;
     if (!shoppinglist) {
       return (
@@ -64,6 +77,9 @@ class SingleShoppinglist extends Component {
           buyItem={this.onBoughtClick}
           deleteItem={this.onDeleteClick}
           shId={id}
+          deleteModal={this.deleteModal}
+          currentModal={modal}
+          hideDeleteModal={this.hideDeleteModal}
         />
         <Link to={`/shoppinglist/${id}/add_item`} href>
           <FloatingActionButton style={style}>
@@ -75,10 +91,13 @@ class SingleShoppinglist extends Component {
   }
 }
 
-const mapStateToprops = ({ shoppinglists, items, gettingItems }, ownProps) => ({
+const mapStateToprops = ({
+  shoppinglists, items, gettingItems, modals,
+}, ownProps) => ({
   shoppinglist: shoppinglists[ownProps.match.params.id],
   items,
   gettingItems,
+  modal: modals,
 });
 
 export default connect(mapStateToprops, {
@@ -86,4 +105,6 @@ export default connect(mapStateToprops, {
   fetchItems,
   buyItem,
   deleteItem,
+  showModal,
+  hideModal,
 })(SingleShoppinglist);

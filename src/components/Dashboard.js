@@ -76,8 +76,6 @@ class Dashboard extends Component {
       pagination,
       user,
       deletingShoppinglist,
-      showModal,
-      hideModal,
       modal,
     } = this.props;
     const searchShoppinglist = _.debounce(term => this.searchShoppinglist(term), 1000);
