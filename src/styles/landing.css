@@ -10,6 +10,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  min-height: 95vh;
 }
 
 .flex-item {
@@ -30,7 +31,8 @@
 
 
 .card {
-  width: 800px;
+  min-width: 100vh;
+  max-width: 100vh;
   margin: 25px;
 }
 
@@ -64,10 +66,10 @@ field {
   text-transform: uppercase;
 }
 
-.single-shoppinglist{
-  margin-left: 300px;
-  width: 800px;
-}
+
+.flex-content {
+  flex: 1;
+} 
 
 .bought-indication {
   background-color: #E0E0E0 !important;

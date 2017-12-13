@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import { Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import { TextField } from 'redux-form-material-ui';
 
@@ -54,14 +53,6 @@ class LoginForm extends Component {
             )}
           </div>
           <hr />
-          <div>
-            <p>
-              Don't have an account? Please{' '}
-              <Link to="/register" href>
-                register
-              </Link>
-            </p>
-          </div>
         </form>
       </div>
     );

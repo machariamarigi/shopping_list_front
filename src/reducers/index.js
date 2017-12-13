@@ -7,6 +7,7 @@ import loggingIn from './loginReducer';
 import ShoppinglistReducer from './shoppinglistReducer';
 import UserReducer from './userReducer';
 import ItemsReducer from './itemReducer';
+import modals from './modalReducer';
 
 const {
   shoppinglists,
@@ -30,4 +31,5 @@ export default combineReducers({
   items,
   gettingItems,
   deletingShoppinglist,
+  modals,
 });
