@@ -82,3 +82,7 @@ field {
 .chip {
   text-decoration: none !important;
 }
+
+.not-found {
+  margin: 5%;
+}
