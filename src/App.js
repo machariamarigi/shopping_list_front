@@ -1,3 +1,7 @@
+/**
+ * Applicatin entry point setting up the store and react router
+*/
+
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -5,7 +9,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import store from './store';
 import Landing from './components/Landing';
-
 
 const App = () => (
   <Provider store={store()}>
