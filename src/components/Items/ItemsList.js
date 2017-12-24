@@ -11,7 +11,7 @@ const style = {
   float: 'right',
 };
 
-const renderItems = (items, buyItem, deleteItem, shId, deleteModal) =>
+const renderItems = (items, buyItem, deleteItem, shId, deleteModal, deletingItems) =>
   _.map(items, item => (
     <Card key={item.uuid} className={item.bought ? 'card bought-indication' : 'card'}>
       <CardText className={item.bought ? 'strike' : ''}>
@@ -24,7 +24,15 @@ const renderItems = (items, buyItem, deleteItem, shId, deleteModal) =>
           secondary
           style={style}
           onClick={event => deleteModal(event, item.uuid)}
+          disabled={deletingItems}
         />
+        {deletingItems && (
+          <img
+            style={style}
+            alt="loading..."
+            src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+          />
+        )}
         {item.bought ? (
           <div>
             <Chip backgroundColor={blue300} onRequestDelete={e => buyItem(item.uuid, e)}>
@@ -43,7 +51,14 @@ const renderItems = (items, buyItem, deleteItem, shId, deleteModal) =>
 
 const ItemsList = (props) => {
   const {
-    items, buyItem, deleteItem, shId, deleteModal, currentModal, hideDeleteModal
+    items,
+    buyItem,
+    deleteItem,
+    shId,
+    deleteModal,
+    currentModal,
+    hideDeleteModal,
+    deletingItems,
   } = props;
   if (_.isEmpty(items)) {
     return (
@@ -55,11 +70,7 @@ const ItemsList = (props) => {
 
   const actions = [
     <FlatButton label="Cancel" onClick={event => hideDeleteModal(event)} />,
-    <FlatButton
-      label="Delete"
-      secondary
-      onClick={event => deleteItem(currentModal.id, event)}
-    />,
+    <FlatButton label="Delete" secondary onClick={event => deleteItem(currentModal.id, event)} />,
   ];
 
   return (
@@ -71,7 +82,7 @@ const ItemsList = (props) => {
         actions={actions}
       />
       <h3>Shopping list Items</h3>
-      {renderItems(items, buyItem, deleteItem, shId, deleteModal)}
+      {renderItems(items, buyItem, deleteItem, shId, deleteModal, deletingItems)}
     </div>
   );
 };

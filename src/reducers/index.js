@@ -16,7 +16,7 @@ const {
   deletingShoppinglist,
 } = ShoppinglistReducer;
 const { user, gettingUser, auth } = UserReducer;
-const { items, gettingItems } = ItemsReducer;
+const { items, gettingItems, deletingItems } = ItemsReducer;
 export default combineReducers({
   form: formReducer,
   registration,
@@ -32,4 +32,5 @@ export default combineReducers({
   gettingItems,
   deletingShoppinglist,
   modals,
+  deletingItems,
 });

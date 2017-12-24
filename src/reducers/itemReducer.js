@@ -29,9 +29,23 @@ const gettingItems = (state = false, action) => {
   }
 };
 
+const deletingItems = (state = false, action) => {
+  switch (action.type) {
+    case types.DELETE_ITEM_REQUEST:
+      return true;
+    case types.DELETE_ITEM_SUCCESS:
+      return false;
+    case types.DELETE_ITEM_FAILURE:
+      return false;
+    default:
+      return state;
+  }
+};
+
 const ItemReducer = {
   items,
   gettingItems,
+  deletingItems,
 };
 
 export default ItemReducer;

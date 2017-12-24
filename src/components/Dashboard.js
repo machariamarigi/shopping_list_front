@@ -9,6 +9,7 @@ import { fetchShoppinglists, deleteShoppinglist } from '../actions/shoppinglistA
 import { showModal, hideModal } from '../actions/modalActions';
 import Search from './UI/Search';
 import ShoppingLists from './ShoppingLists/ShoppingLists';
+import Loader from './UI/Loader';
 
 const style = {
   marginRight: 20,
@@ -82,9 +83,7 @@ class Dashboard extends Component {
 
     if (gettingShoppinglists) {
       return (
-        <div>
-          <p>Loading...</p>
-        </div>
+        <Loader segments="20" />
       );
     }
 
