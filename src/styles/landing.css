@@ -82,3 +82,55 @@ field {
 .chip {
   text-decoration: none !important;
 }
+
+.not-found {
+  margin: 5%;
+}
+
+.svg {
+  max-width: 75vh;
+  max-height: 75vw;
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+}
+.svg path {
+  fill: none;
+  stroke-width: 11;
+  stroke-linejoin: round;
+  -webkit-animation: 25s trace linear infinite;
+          animation: 25s trace linear infinite;
+}
+
+.centeredContent {
+  max-height: 30vh;
+  max-width: 30vw;
+}
+
+.loader {
+  color: rgb(0, 188, 212);
+}
+
+
+@-webkit-keyframes trace {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes trace {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}

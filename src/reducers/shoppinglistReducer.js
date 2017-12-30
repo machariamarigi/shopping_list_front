@@ -33,7 +33,7 @@ const deletingShoppinglist = (state = false, action) => {
     default:
       return state;
   }
-}
+};
 
 const gettingShoppinglists = (state = {}, action) => {
   switch (action.type) {

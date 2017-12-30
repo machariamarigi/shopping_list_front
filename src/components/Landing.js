@@ -18,6 +18,7 @@ import ShoppingListEdit from './ShoppingLists/ShoppingListEdit';
 import ItemAdd from './Items/ItemAdd';
 import ItemEdit from './Items/ItemEdit';
 import NotFound from './UI/NotFound';
+import Loader from './UI/Loader';
 
 class landingPage extends Component {
   constructor(props) {
@@ -47,7 +48,7 @@ class landingPage extends Component {
     } = this.props;
 
     if (gettingUser) {
-      return <div>Loading ... </div>;
+      return <Loader segments="20" />;
     }
 
     return (
