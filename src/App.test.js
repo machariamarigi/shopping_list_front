@@ -1,13 +1,15 @@
 import React from 'react';
 import App from './App';
 
-const localStorageMock = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  clear: jest.fn(),
-};
-global.localStorage = localStorageMock;
+describe('App', () => {
+  it('Renders 1 <App /> component', () => {
+    const component = shallow(<App />);
+    expect(component).toHaveLength(1);
+  });
 
-it('renders without crashing', () => {
-  shallow(<App />);
+  test('snapshots', () => {
+    const component = renderer.create(<App />);
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });
