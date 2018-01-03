@@ -1,6 +1,11 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
 
+/**
+ * Modal dialog to pop up for confirmatory actions based of different
+ * contexts like deleting a shopping list or an item.
+ */
+
 const ModalDialog = (props) => {
   const {
     context, actions, open, message,

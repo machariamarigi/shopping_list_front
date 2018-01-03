@@ -2,6 +2,10 @@ import React from 'react';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
+/**
+ * Dispay error messages when user vists a wrong url
+ */
+
 const notFound = () => (
   <div className="error-page">
     <Card className="not-found">

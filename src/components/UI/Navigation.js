@@ -24,7 +24,7 @@ const AppNav = (props) => {
         <Link to="/dashboard" href>
           <MenuItem primaryText="Dashboard" />
         </Link>
-        <MenuItem primaryText="Log Out" onClick={e => logoutUser(e)} />
+        <MenuItem primaryText="Log Out" id="logout" onClick={event => logoutUser(event)} />
       </IconMenu>
     </div>
   );
