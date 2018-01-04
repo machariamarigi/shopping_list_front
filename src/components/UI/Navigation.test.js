@@ -1,13 +1,14 @@
 import React from 'react';
 
 import Navigation from './Navigation';
+import { testUser } from '../../helpers/testValues';
 
 describe('Navigation tests', () => {
   let functionCall = false;
   function shallowNavigation(auth) {
     const props = {
       authenticated: auth,
-      user: { username: 'TestUser' },
+      user: testUser,
     };
     return shallow(<Navigation {...props} />);
   }

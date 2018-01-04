@@ -2,11 +2,11 @@ import React from 'react';
 
 import Search from './Search';
 
-describe('NotFound tests', () => {
+describe('Search tests', () => {
   let functionCall = false;
   function shallowSearch() {
     const props = {
-      onSearchTermChange: (event) => {
+      onSearchTermChange: () => {
         functionCall = true;
       },
     };
