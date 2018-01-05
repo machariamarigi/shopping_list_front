@@ -65,8 +65,7 @@ class Dashboard extends Component {
   }
 
   searchShoppinglist(event) {
-    event.persist();
-    const term = event.target.value;
+    let term = event.target.value;
     this.props.fetchShoppinglists(1, term);
   }
 
