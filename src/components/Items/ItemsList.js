@@ -25,7 +25,7 @@ const style = {
  */
 const renderItems = (items, buyItem, shId, deleteModal, deletingItems) =>
   _.map(items, item => (
-    // map through all items in a shoppinglists creating material ui cards for them
+    // map through all items in a shoppinglists creating material ui cards for them using lodash
     <Card key={item.uuid} className={item.bought ? 'card bought-indication' : 'card'}>
       <CardText className={item.bought ? 'strike' : ''}>
         <p>Item: {item.name}</p>
