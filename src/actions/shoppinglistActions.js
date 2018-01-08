@@ -33,7 +33,7 @@ export function fetchShoppinglists(pageNumber, searchTerm) {
   };
 }
 
-export function fetchShoppinglist(id) {
+export function fetchShoppinglist(id, callback) {
   const request = () => ({ type: types.FETCH_A_SHOPPINGLIST_REQUEST });
   const success = response => ({ type: types.FETCH_A_SHOPPINGLIST_SUCCESS, response });
   const failure = error => ({ type: types.FETCH_A_SHOPPINGLIST_FAILURE, error });
@@ -47,6 +47,7 @@ export function fetchShoppinglist(id) {
       (error) => {
         dispatch(failure(error));
         dispatch(alertActions.error(error.response.data.message));
+        callback('/*');
       },
     );
   };
