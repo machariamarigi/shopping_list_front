@@ -27,7 +27,9 @@ class SingleShoppinglist extends Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
-    this.props.fetchShoppinglist(id);
+    this.props.fetchShoppinglist(id, (path) => {
+      this.props.history.push(path);
+    });
     this.props.fetchItems(id);
   }
 

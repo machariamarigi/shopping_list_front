@@ -74,7 +74,13 @@ class RegistrationForm extends Component {
             />
           </div>
           <div>
-            <RaisedButton label="Register" primary style={style} type="Submit" disabled={registering} />
+            <RaisedButton
+              label="Register"
+              primary
+              style={style}
+              type="Submit"
+              disabled={registering}
+            />
             {registering && (
               <img
                 alt="loading..."
@@ -95,6 +101,12 @@ function mapStateToProps(state) {
     registering,
   };
 }
+
+export const registrationFormExports = {
+  mapStateToProps,
+  RegistrationForm,
+  validate,
+};
 
 export default reduxForm({
   form: 'REGISTERFORM',

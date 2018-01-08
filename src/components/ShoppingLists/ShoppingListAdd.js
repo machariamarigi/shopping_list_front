@@ -38,4 +38,9 @@ function mapStateToProps(state) {
   };
 }
 
+export const shoppingListAddExports = {
+  mapStateToProps,
+  ShoppingListAdd,
+};
+
 export default connect(mapStateToProps, { addShoppinglist })(ShoppingListAdd);

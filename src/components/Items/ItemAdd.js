@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import ItemForm from './ItemForm';
 import { addItem } from '../../actions/itemActions';
 
+/**
+ * Component that contains the items form and is used to add Items to a shoppinglist
+ * by a user
+ */
 class ItemAdd extends Component {
   constructor(props) {
     super(props);
@@ -36,4 +39,9 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { addItem })(ItemAdd));
+export const itemAddExports = {
+  mapStateToProps,
+  ItemAdd,
+};
+
+export default connect(mapStateToProps, { addItem })(ItemAdd);

@@ -13,7 +13,7 @@ const style = {
  * Form component that will be used to add and edit items
  */
 
-const ItemForm = (props) => {
+export const ItemForm = (props) => {
   const {
     handleSubmit, addingItem, onSubmit, context, editingItem, shId,
   } = props;

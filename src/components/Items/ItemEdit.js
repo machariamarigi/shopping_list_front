@@ -54,4 +54,9 @@ const mapStateToProps = ({ items, editingItem }, ownProps) => ({
   item: items[ownProps.match.params.itId],
 });
 
+export const itemEditExports = {
+  ItemEdit,
+  mapStateToProps,
+};
+
 export default connect(mapStateToProps, { editItem, fetchItem })(ItemEdit);

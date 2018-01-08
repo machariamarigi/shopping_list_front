@@ -14,13 +14,23 @@ const paginationStyle = {
   margin: 5,
 };
 
+
+/**
+ * Method used to render all shopping lists that are created by a user
+ * @param {Object} shoppinglists contains all the shoppinglists created by a user
+ * @param {Function} clickShoppinglist called when a user clicks on a shoppionglist
+ * @param {Boolean} deletingShoppinglist used for the execution of the asynchronous deleting of
+ * shoppinglists
+ * @param {Function} deleteModal called when a user clicks the delete shoppinglists button
+ */
 const renderShoppinglists = (
   shoppinglists,
-  deleteShoppinglist,
   clickShoppinglist,
   deletingShoppinglist,
   deleteModal,
 ) =>
+  // Use lodash to map through the shoppinglists object and generate a material ui card for all the
+  // shoppinglists.
   _.map(shoppinglists, shoppinglist => (
     <Paper zDepth={5} rounded={false} className="card">
       <Card key={shoppinglist.uuid}>
@@ -54,6 +64,11 @@ const renderShoppinglists = (
     </Paper>
   ));
 
+/**
+ * Presentational component for all the shoppinglists created by a user
+ * @param {Object} props constains all the properties passed on to the component passed
+ * from the parrent
+ */
 const ShoppingLists = (props) => {
   const {
     shoppinglists,
@@ -94,20 +109,19 @@ const ShoppingLists = (props) => {
       />
       {renderShoppinglists(
         shoppinglists,
-        deleteShoppinglist,
         clickShoppinglist,
         deletingShoppinglist,
         deleteModal,
       )}
       {hasPreviousPage ? (
-        <RaisedButton onClick={event => onPreviousPage(event)} style={paginationStyle}>
+        <RaisedButton onClick={event => onPreviousPage(event)} className="prev" style={paginationStyle}>
           Previous Page
         </RaisedButton>
       ) : (
         ''
       )}
       {hasNextPage ? (
-        <RaisedButton onClick={event => onNextPage(event)} style={paginationStyle}>
+        <RaisedButton onClick={event => onNextPage(event)} className="next" style={paginationStyle}>
           Next Page
         </RaisedButton>
       ) : (
