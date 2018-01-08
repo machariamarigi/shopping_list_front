@@ -7,11 +7,19 @@ import { TextField } from 'redux-form-material-ui';
 import { login } from '../../actions/authActions';
 import { email, required } from '../../helpers/formValidators';
 
+// describe the width of the login button
 const style = {
   margin: 12,
 };
 
+/**
+ * Component that contain the form that allows users to login using Redux form
+ */
 class LoginForm extends Component {
+  /**
+   * Method to submit form details
+   * @param {Object} user contains the email and password of a user.
+   */
   onSubmit(user) {
     const { dispatch } = this.props;
     dispatch(login(user, (path) => {
@@ -65,6 +73,11 @@ function mapStateToProps(state) {
     loggingIn,
   };
 }
+
+export const loginFormExports = {
+  LoginForm,
+  mapStateToProps,
+};
 
 export default reduxForm({
   form: 'LOGINFORM',
