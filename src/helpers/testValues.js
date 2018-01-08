@@ -7,12 +7,12 @@ export const testUser = {
 };
 
 export const testShoppinglist = {
-  id: 1,
+  uuid: 1,
   name: 'Test Shoppinglist',
 };
 
 export const testShoppinglists = {
-  1: { uuid: 1, name: 'Test Shoppinglist1' },
+  1: { uuid: 1, name: 'Test Shoppinglist' },
   2: { uuid: 2, name: 'Test Shoppinglist2' },
   3: { uuid: 3, name: 'Test Shoppinglist3' },
 };
@@ -20,11 +20,27 @@ export const testShoppinglists = {
 export const testItem = {
   uuid: 1,
   name: 'Test Item',
-  quantity: 4,
+  quantity: 3,
+  bought: true,
 };
 
 export const testItems = {
-  1: { uuid: 1, name: 'Test Item1', quantity: 3 },
-  2: { uuid: 2, name: 'Test Item2', quantity: 43 },
-  3: { uuid: 3, name: 'Test Item3', quantity: 800 },
+  1: {
+    uuid: 1,
+    name: 'Test Item',
+    quantity: 3,
+    bought: true,
+  },
+  2: {
+    uuid: 2,
+    name: 'Test Item2',
+    quantity: 43,
+    bought: false,
+  },
+  3: {
+    uuid: 3,
+    name: 'Test Item3',
+    quantity: 800,
+    bought: false,
+  },
 };
