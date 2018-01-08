@@ -5,7 +5,7 @@ import { testShoppinglist, testShoppinglists } from '../../helpers/testValues';
 
 const { ShoppingListEdit, mapStateToProps } = shoppingListEditExports;
 
-describe('Tests for ItemAdd component', () => {
+describe('Tests for ShoppingListEdit component', () => {
   function shallowShoppingEdit(editingShoppinglist) {
     const props = {
       shoppinglist: testShoppinglist,

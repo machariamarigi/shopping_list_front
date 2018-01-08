@@ -5,7 +5,7 @@ import { testItem, testItems } from '../../helpers/testValues';
 
 const { ItemEdit, mapStateToProps } = itemEditExports;
 
-describe('Tests for ItemAdd component', () => {
+describe('Tests for ItemEdit component', () => {
   function shallowItemAdd(addingItem) {
     const props = {
       item: testItem,

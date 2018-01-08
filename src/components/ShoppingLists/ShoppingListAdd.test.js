@@ -4,7 +4,7 @@ import { shoppingListAddExports } from './ShoppingListAdd';
 
 const { ShoppingListAdd, mapStateToProps } = shoppingListAddExports;
 
-describe('Tests for ItemAdd component', () => {
+describe('Tests for ShoppingListAdd component', () => {
   function shallowAdd(addingShoppinglist) {
     const props = {
       addingShoppinglist,

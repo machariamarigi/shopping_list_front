@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ShoppinglistForm } from './ShoppingListForm';
 
-describe('Tests for ItemForm', () => {
+describe('Tests for ShoppingListForm', () => {
   function shallowForm(context) {
     const props = {
       context,
