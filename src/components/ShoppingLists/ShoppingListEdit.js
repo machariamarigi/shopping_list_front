@@ -53,4 +53,9 @@ const mapStateToProps = ({ shoppinglists, editingShoppinglist }, ownProps) => ({
   shoppinglist: shoppinglists[ownProps.match.params.id],
 });
 
+export const shoppingListEditExports = {
+  mapStateToProps,
+  ShoppingListEdit,
+};
+
 export default connect(mapStateToProps, { editShoppinglist, fetchShoppinglist })(ShoppingListEdit);

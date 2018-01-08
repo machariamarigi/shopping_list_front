@@ -9,7 +9,11 @@ const style = {
   margin: 12,
 };
 
-const ShoppinglistForm = (props) => {
+/**
+ *  Form to be used when adding or editing shoppinglists
+ */
+
+export const ShoppinglistForm = (props) => {
   const {
     handleSubmit, addingShoppinglist, onSubmit, context, editingShoppinglist,
   } = props;
