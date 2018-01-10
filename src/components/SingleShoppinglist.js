@@ -56,12 +56,12 @@ class SingleShoppinglist extends Component {
   }
 
   render() {
-    const { shoppinglist, items, modal, deletingItems } = this.props;
+    const {
+      shoppinglist, items, modal, deletingItems,
+    } = this.props;
     const { id } = this.props.match.params;
     if (!shoppinglist) {
-      return (
-        <Loader segments="20" />
-      );
+      return <Loader segments="20" />;
     }
     return (
       <div className="flex-container">
@@ -91,9 +91,12 @@ class SingleShoppinglist extends Component {
   }
 }
 
-const mapStateToprops = ({
-  shoppinglists, items, gettingItems, modals, deletingItems,
-}, ownProps) => ({
+const mapStateToprops = (
+  {
+    shoppinglists, items, gettingItems, modals, deletingItems,
+  },
+  ownProps,
+) => ({
   shoppinglist: shoppinglists[ownProps.match.params.id],
   items,
   gettingItems,

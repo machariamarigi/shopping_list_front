@@ -25,6 +25,7 @@
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.4.0",
     "redux-promise": "^0.5.3",
+    "redux-testkit": "^1.0.6",
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
@@ -33,6 +34,12 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js}",
+      "!src/registerServiceWorker.js"
+    ]
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
