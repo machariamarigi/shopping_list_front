@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/machariamarigi/shopping_list_front.svg?branch=development)](https://travis-ci.org/machariamarigi/shopping_list_front)[![Coverage Status](https://coveralls.io/repos/github/machariamarigi/shopping_list_front/badge.svg)](https://coveralls.io/github/machariamarigi/shopping_list_front)
+[![Build Status](https://travis-ci.org/machariamarigi/shopping_list_front.svg?branch=development)](https://travis-ci.org/machariamarigi/shopping_list_front) [![Coverage Status](https://coveralls.io/repos/github/machariamarigi/shopping_list_front/badge.svg)](https://coveralls.io/github/machariamarigi/shopping_list_front)
 # Shoppinglist App
 
 The project aims to build an application that helps users manage their various shopping lists. Visit the live application version [here](https://shopping-listy-front.herokuapp.com/)

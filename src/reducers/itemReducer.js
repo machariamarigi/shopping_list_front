@@ -1,7 +1,12 @@
 import _ from 'lodash';
 import * as types from '../actions/actionTypes';
 
-const items = (state = {}, action) => {
+/**
+ * Reducer used to add Items or an Item to state of the application
+ * @param {Object} state used to show the state of the application in regards to items
+ * @param {Object} action used to return different pieces of state based on the action type
+ */
+const items = (state = {}, action = {}) => {
   switch (action.type) {
     case types.ADD_ITEM_REQUEST:
       return { addingItem: true };
@@ -20,7 +25,12 @@ const items = (state = {}, action) => {
   }
 };
 
-const gettingItems = (state = false, action) => {
+/**
+ * Reducer used to handle async fetching of items
+ * @param {Boolean} state used to show the state of the application in regards to getting items
+ * @param {Object} action used to return different pieces of state based on the action type
+ */
+const gettingItems = (state = false, action = {}) => {
   switch (action.type) {
     case types.FETCH_ITEMS_REQUEST:
       return true;

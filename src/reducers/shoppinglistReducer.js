@@ -1,9 +1,15 @@
 import _ from 'lodash';
 import * as types from '../actions/actionTypes';
 
-const shoppinglists = (state = {}, action) => {
+/**
+ * Reducer that handles all the state of the shoppinglist object
+ * @param {Object} state used to show the state of the application in regards to shoppinglists
+ * @param {Object} action used to return different pieces of state based on the action type
+ */
+const shoppinglists = (state = {}, action = {}) => {
   switch (action.type) {
     case types.FETCH_SHOPPINGLISTS_SUCCESS:
+      // use lodash to map through the shoppinglists array and and produce an object with all the 
       return _.mapKeys(action.response.shoppinglists, 'uuid');
     case types.FETCH_A_SHOPPINGLIST_SUCCESS:
       return { ...state, [action.response.shoppinglist.uuid]: action.response.shoppinglist };
@@ -22,7 +28,13 @@ const shoppinglists = (state = {}, action) => {
   }
 };
 
-const deletingShoppinglist = (state = false, action) => {
+/**
+ * Reducer that handles the state of deleting a shopping list
+ * @param {Object} state used to show the state of the application in regards to deleting a 
+ * shoppinglist
+ * @param {Object} action used to return different pieces of state based on the action type
+ */
+const deletingShoppinglist = (state = false, action = {}) => {
   switch (action.type) {
     case types.DELETE_SHOPPINGLIST_REQUEST:
       return true;
@@ -35,7 +47,12 @@ const deletingShoppinglist = (state = false, action) => {
   }
 };
 
-const gettingShoppinglists = (state = {}, action) => {
+/**
+ * Reducer that handles the state of getting shopping lists
+ * @param {Object} state used to show the state of the application in regards to shoppinglists
+ * @param {Object} action used to return different pieces of state based on the action type
+ */
+const gettingShoppinglists = (state = {}, action = {}) => {
   switch (action.type) {
     case types.FETCH_SHOPPINGLISTS_REQUEST:
       return true;
@@ -48,9 +65,14 @@ const gettingShoppinglists = (state = {}, action) => {
   }
 };
 
+/**
+ * Reducer that handles the state of pagintion in the application
+ * @param {Object} state used to show the state of the application in regards to pagination
+ * @param {Object} action used to return different pieces of state based on the action type
+ */
 const shoppingPagination = (
   state = { nextPage: 1, hasNextPage: false, hasPreviousPage: false },
-  action,
+  action = {},
 ) => {
   switch (action.type) {
     case types.SET_NEXT_PAGE:
